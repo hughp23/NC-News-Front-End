@@ -1,4 +1,26 @@
 .App {
+  height: 100vh;
   text-align: center;
 }
 
+.header {
+  border: red 2px solid;
+  grid-area: header;
+}
+
+.nav {
+  border: green 2px solid;
+  grid-area: nav;
+}
+
+Sidebar {
+  grid-area: sidebar;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
