@@ -8,7 +8,7 @@ class Articles extends Component {
   };
   render() {
     const { articles } = this.state;
-    console.log(articles);
+    // console.log(articles, "<--- Articles");
     return (
       <div>
         <h2>Articles</h2>
@@ -17,8 +17,8 @@ class Articles extends Component {
             return (
               <li key={`${article.title}`}>
                 <h3>{article.title}</h3>
-                {/* <p>{article.body}</p> */}
-                <Link to={`/article/${article._id}`}>Read More...</Link>
+                <p>{article.body}</p>
+                <Link to={`api/articles/${article._id}`}>Read More...</Link>
               </li>
             );
           })}
@@ -28,12 +28,10 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props, "props");
     const { topic } = this.props;
     if (prevProps.topic !== topic) {
       api.getArticles(topic).then(({ articles }) => {
         this.setState({ articles });
-        //   console.log(data);
       });
     }
   }

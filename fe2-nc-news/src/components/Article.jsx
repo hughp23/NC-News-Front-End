@@ -16,7 +16,9 @@ class Article extends Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props, "props");
     const { id } = this.props;
+    console.log(id);
     api.getArticleById(id).then(article => {
       this.setState({ article });
     });

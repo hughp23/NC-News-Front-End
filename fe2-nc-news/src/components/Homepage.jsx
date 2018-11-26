@@ -8,11 +8,22 @@ class Homepage extends Component {
   };
   render() {
     const { articles } = this.state;
-    console.log(articles);
+    // console.log(articles);
     return (
       <main>
         <h1>Homepage</h1>
-        <Articles />
+        <h2>Articles</h2>
+        <ul>
+          {articles.map(article => {
+            return (
+              <li key={`${article.title}`}>
+                <h3>{article.title}</h3>
+                <p>{article.body}</p>
+              </li>
+            );
+          })}
+        </ul>
+        <Articles path=":topic" />
       </main>
     );
   }

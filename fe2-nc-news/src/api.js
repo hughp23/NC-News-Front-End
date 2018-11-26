@@ -2,18 +2,19 @@ import axios from "axios";
 
 const BASE_URL = "https://hidden-escarpment-81683.herokuapp.com/api";
 
-export const getArticles = async info => {
-  if (info === "topic") {
-    const { data } = await axios.get(`${BASE_URL}/topics/${info}/articles`);
+export const getArticles = async topic => {
+  console.log(topic, "topic");
+  if (topic) {
+    const { data } = await axios.get(`${BASE_URL}/topics/${topic}/articles`);
     return data;
-  }
-  if (info === "id") {
-    const { data } = await axios.get(`${BASE_URL}/articles/${info}`);
-    return data;
-  } else {
+  } else if (topic === undefined) {
     const { data } = await axios.get(`${BASE_URL}/articles`);
     return data;
   }
+  // if (info === "id") {
+  //   const { data } = await axios.get(`${BASE_URL}/articles/${info}`);
+  //   return data;
+  // }
 };
 
 export const getArticleById = async id => {

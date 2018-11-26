@@ -16,7 +16,7 @@ class App extends Component {
         <Nav className="nav" />
         <Router>
           <Homepage path="/" />
-          <Articles path="/articles/*" />
+          <Articles path="/articles/:topic" />
           <Article path="/article/:id" />
         </Router>
         <Sidebar />
