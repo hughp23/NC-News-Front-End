@@ -9,6 +9,7 @@ class Article extends Component {
     const { article } = this.state;
     return (
       <div>
+        <h1>Article</h1>
         <h1>{article.title}</h1>
         <p>{article.body}</p>
       </div>
