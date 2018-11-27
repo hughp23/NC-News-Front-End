@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./css/App.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import { Router } from "@reach/router";
@@ -7,9 +7,10 @@ import Homepage from "./components/Homepage";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 import Users from "./components/Users";
 import Login from "./components/Login";
+import SideBar from "./components/SideBar";
 
 class App extends Component {
   state = {
@@ -21,6 +22,7 @@ class App extends Component {
         <Header className="header" />
         <Login login={this.login} user={this.state.user}>
           <Nav />
+          <SideBar />
           <Router className="router-wrapper">
             <Homepage path="/" />
             <Articles user={this.state.user} path="/articles/:topic" />
@@ -29,7 +31,7 @@ class App extends Component {
             <Users path="/users/:username" />
           </Router>
         </Login>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 // import UpdateButton from "./UpdateButton";
 import Collapsible from "react-collapsible";
+import "../css/Comments.css";
 
 class Comments extends Component {
   state = {
@@ -10,9 +11,12 @@ class Comments extends Component {
   render() {
     const { comments } = this.state;
     return (
-      <div>
-        <Collapsible trigger={`${comments.length} Comments`}>
-          <ul>
+      <div className="comment">
+        <Collapsible
+          className="collapsibleList"
+          trigger={`${comments.length} Comments`}
+        >
+          <ul className="commentList">
             {comments.map(comment => {
               return (
                 <li key={comment._id}>

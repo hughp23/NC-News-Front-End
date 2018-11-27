@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
 // import Article from "./Article";
+import "../css/Articles.css";
 
 class Articles extends Component {
   state = {
@@ -15,7 +16,7 @@ class Articles extends Component {
         <ul>
           {articles.map(article => {
             return (
-              <li key={`${article.title}`}>
+              <li className="articleList" key={`${article.title}`}>
                 <h3>{article.title}</h3>
                 <p>Comments: {article.comment_count}</p>
                 <p>Votes: {article.votes}</p>

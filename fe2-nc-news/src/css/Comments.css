@@ -1,0 +1,14 @@
+.comment {
+  border: brown 2px solid;
+  margin: 10px;
+}
+
+.collapsibleList {
+  text-align: center;
+  background-color: blue;
+  border: black 1px solid;
+}
+
+ul {
+  list-style-type: none;
+}

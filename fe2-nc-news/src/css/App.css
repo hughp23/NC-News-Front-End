@@ -2,12 +2,12 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid-template: 15% 5% 80% 5%/ 100%;
+  grid-template: 15% 7.5% 87.5% 5%/ 14% 86%;
   grid-template-areas:
-    "header"
-    "nav"
-    "main"
-    "footer";
+    "header header"
+    "nav nav"
+    "sideBar main"
+    "footer footer";
 }
 
 .header {
@@ -18,11 +18,18 @@
 .nav {
   grid-area: nav;
   border: solid 2px green;
+  padding: 5px;
 }
 
 .main {
   border: orange 2px solid;
   grid-area: main;
+  height: 100%;
+}
+
+.sideBar {
+  border: magenta 2px solid;
+  grid-area: sideBar;
 }
 
 .footer {
