@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import Comments from "./Comments";
 
 class Article extends Component {
   state = {
@@ -17,9 +16,20 @@ class Article extends Component {
         <p>{article.body}</p>
         <ul>
           {comments.map(comment => {
-            return <li>comment</li>;
+            return (
+              <li>
+                <h4>Username: {comment.created_by.username}</h4>
+                <p>{comment.body}</p>
+                <p>Posted: {comment.created_at.slice(0, 10)}</p>
+                <button>Vote up</button>
+                <button>Vote down</button>
+              </li>
+            );
           })}
         </ul>
+        <label>Add Comment:</label>
+        <input type="text" />
+        <button>Submit</button>
       </main>
     );
   }

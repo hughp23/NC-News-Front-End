@@ -2,11 +2,12 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid-template: 15% 5% 80% / 100%;
+  grid-template: 15% 5% 80% 5%/ 100%;
   grid-template-areas:
     "header"
     "nav"
-    "main";
+    "main"
+    "footer";
 }
 
 .header {
@@ -25,5 +26,6 @@
 }
 
 .footer {
+  border: pink 2px solid;
   grid-area: footer;
 }
