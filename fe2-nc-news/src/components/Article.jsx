@@ -4,16 +4,19 @@ import * as api from "../api";
 class Article extends Component {
   state = {
     article: [],
-    comments: []
+    comments: [],
+    isLoading: false
   };
   render() {
-    const { article, comments } = this.state;
-    console.log(article, "article");
+    const { article, comments, isLoading } = this.state;
+    // console.log(article, "article");
+    
     return (
       <main className="main">
         <h1>Article</h1>
         <h1>{article.title}</h1>
         <p>{article.body}</p>
+        <p>{article.created_by.username}</p>
         <ul>
           {comments.map(comment => {
             return (

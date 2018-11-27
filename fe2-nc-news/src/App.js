@@ -9,24 +9,35 @@ import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
 import Footer from "./components/Footer";
 import Users from "./components/Users";
+import Login from "./components/Login";
 
 class App extends Component {
+  state = {
+    user: {}
+  };
   render() {
+    console.log(this.state.user, "user");
     return (
       <div className="App">
         <Header className="header" />
         <Nav />
-        <Router>
-          <Homepage path="/" />
-          <Articles path="/articles/:topic" />
-          <Article path="/articles/article/:id" />
-          <AddArticle path="/articles/new_article" />
-          <Users path="/users" />
-        </Router>
+        <Login login={this.login} user={this.state.user}>
+          <Router>
+            <Homepage path="/" />
+            <Articles path="/articles/:topic" />
+            <Article path="/articles/article/:id" />
+            <AddArticle path="/articles/new_article" />
+            <Users path="/users" />
+          </Router>
+        </Login>
         <Footer />
       </div>
     );
   }
+
+  login = user => {
+    this.setState({ user });
+  };
 }
 
 export default App;
