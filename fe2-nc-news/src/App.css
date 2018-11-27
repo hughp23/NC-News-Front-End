@@ -1,26 +1,29 @@
 .App {
   height: 100vh;
   text-align: center;
+  display: grid;
+  grid-template: 15% 5% 80% / 100%;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main";
 }
 
 .header {
-  border: red 2px solid;
   grid-area: header;
+  border: solid 2px red;
 }
 
 .nav {
-  border: green 2px solid;
   grid-area: nav;
+  border: solid 2px green;
 }
 
-Sidebar {
-  grid-area: sidebar;
-}
-
-main {
+.main {
+  border: orange 2px solid;
   grid-area: main;
 }
 
-footer {
+.footer {
   grid-area: footer;
 }

@@ -12,8 +12,8 @@ class Articles extends Component {
     // console.log(articles, "<--- Articles");
     console.log(articles);
     return (
-      <div>
-        <h2>Articles</h2>
+      <main className="main">
+        <Link to="/articles/new_article">Post New Article</Link>
         <ul>
           {articles.map(article => {
             return (
@@ -21,13 +21,17 @@ class Articles extends Component {
                 <h3>{article.title}</h3>
                 <p>Comment Count: {article.comment_count}</p>
                 <p>Votes: {article.votes}</p>
+                <button>Vote up</button>
+                <button>Vote down</button>
                 {console.log(article._id)}
-                <Link to={`/articles/${article._id}`}>Read More...</Link>
+                <Link to={`/articles/article/${article._id}`}>
+                  Read More...
+                </Link>
               </li>
             );
           })}
         </ul>
-      </div>
+      </main>
     );
   }
 

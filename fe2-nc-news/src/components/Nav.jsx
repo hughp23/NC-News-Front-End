@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 class Nav extends Component {
   render() {
     return (
-      <div>
+      <div className="nav">
         <Link to="/">Home</Link>
         {" | "}
         <Link to="/articles/coding">Coding</Link>
@@ -12,6 +12,8 @@ class Nav extends Component {
         <Link to="/articles/football">Football</Link>
         {" | "}
         <Link to="/articles/cooking">Cooking</Link>
+        <label>Username: </label>
+        <input type="text" />
       </div>
     );
   }

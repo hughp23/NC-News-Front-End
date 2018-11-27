@@ -10,15 +10,15 @@ class Homepage extends Component {
     const { articles } = this.state;
     // console.log(articles);
     return (
-      <main>
+      <main className="main">
         <h1>Homepage</h1>
-        <h2>Articles</h2>
         <ul>
           {articles.map(article => {
             return (
               <li key={`${article.title}`}>
                 <h3>{article.title}</h3>
                 <p>{article.body}</p>
+                <p>{article.belongs_to}</p>
               </li>
             );
           })}

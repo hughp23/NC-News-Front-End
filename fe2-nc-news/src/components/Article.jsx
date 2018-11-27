@@ -1,27 +1,40 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import Comments from "./Comments";
 
 class Article extends Component {
   state = {
-    article: {}
+    article: [],
+    comments: []
   };
   render() {
-    const { article } = this.state;
+    const { article, comments } = this.state;
+    console.log(article, "article");
     return (
-      <div>
+      <main className="main">
         <h1>Article</h1>
         <h1>{article.title}</h1>
         <p>{article.body}</p>
-      </div>
+        <ul>
+          {comments.map(comment => {
+            return <li>comment</li>;
+          })}
+        </ul>
+      </main>
     );
   }
 
-  componentDidUpdate() {
-    console.log(this.props, "props");
+  componentDidMount() {
+    // console.log(this.props, "props");
     const { id } = this.props;
-    console.log(id);
-    api.getArticleById(id).then(article => {
+    // console.log(id);
+    api.getArticleById(id).then(({ article }) => {
+      console.log(article);
       this.setState({ article });
+    });
+    api.getComments(id).then(({ comments }) => {
+      console.log(comments, "comments");
+      this.setState({ comments });
     });
   }
 }
