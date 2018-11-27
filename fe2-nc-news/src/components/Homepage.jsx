@@ -8,7 +8,7 @@ class Homepage extends Component {
   render() {
     return (
       <main className="main">
-        <Articles path="/articles/:topic" />
+        <Articles />
       </main>
     );
   }

@@ -5,6 +5,7 @@ class AddArticle extends Component {
     return (
       <main className="main">
         <h1>Add article here</h1>
+        <label htmlFor="title">Title: </label>
         <input type="text" />
         <button>Submit</button>
       </main>

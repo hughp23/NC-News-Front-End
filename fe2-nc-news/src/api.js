@@ -3,11 +3,12 @@ import axios from "axios";
 const BASE_URL = "https://hidden-escarpment-81683.herokuapp.com/api";
 
 export const getArticles = async topic => {
-  // console.log(topic, "topic");
+  console.log(topic, "topic api");
   if (topic) {
     const { data } = await axios.get(`${BASE_URL}/topics/${topic}/articles`);
     return data;
   } else if (topic === undefined) {
+    console.log(topic, "inside api call");
     const { data } = await axios.get(`${BASE_URL}/articles`);
     return data;
   }
@@ -27,9 +28,22 @@ export const getComments = async id => {
   return data;
 };
 
+export const getUsers = async username => {
+  const { data } = await axios.get(`${BASE_URL}/users`);
+  return data.users;
+};
+
 export const login = async username => {
   // console.log(username);
   const { data } = await axios.get(`${BASE_URL}/users/${username}`);
   console.log(data);
   return data.user;
+};
+
+export const updateVote = async (dataType, id, change) => {
+  const { data } = await axios.patch(
+    `${BASE_URL}/${dataType}/${id}?votes=${change}`
+  );
+  console.log(data, "data");
+  return data;
 };

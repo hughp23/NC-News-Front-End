@@ -20,14 +20,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header className="header" />
-        <Nav />
         <Login login={this.login} user={this.state.user}>
+          <Nav />
           <Router>
             <Homepage path="/" />
             <Articles path="/articles/:topic" />
             <Article path="/articles/article/:id" />
             <AddArticle path="/articles/new_article" />
-            <Users path="/users" />
+            <Users path="/users/:username" />
           </Router>
         </Login>
         <Footer />

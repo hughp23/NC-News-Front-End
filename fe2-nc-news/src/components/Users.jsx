@@ -3,9 +3,10 @@ import * as api from "../api";
 
 class Users extends Component {
   state = {
-    users: []
+    user: {}
   };
   render() {
+    const { user } = this.state;
     return (
       <div>
         <h1>Users</h1>
@@ -13,7 +14,12 @@ class Users extends Component {
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props, "props");
+    api.getUsers(this.props.username).then(user => {
+      this.setState({ user });
+    });
+  }
 }
 
 export default Users;

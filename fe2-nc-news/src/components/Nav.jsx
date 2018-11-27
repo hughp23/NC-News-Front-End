@@ -7,8 +7,8 @@ class Nav extends Component {
       <div className="nav">
         <Link to="/">Home</Link>
         {" | "}
-        <Link to="/users">Users</Link>
-        {" | "}
+        {/* <Link to="/users">Users</Link>
+        {" | "} */}
         <Link to="/articles/coding">Coding</Link>
         {" | "}
         <Link to="/articles/football">Football</Link>
