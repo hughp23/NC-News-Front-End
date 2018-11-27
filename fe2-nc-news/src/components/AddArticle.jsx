@@ -3,9 +3,11 @@ import React, { Component } from "react";
 class AddArticle extends Component {
   render() {
     return (
-      <div>
+      <main className="main">
         <h1>Add article here</h1>
-      </div>
+        <input type="text" />
+        <button>Submit</button>
+      </main>
     );
   }
 }

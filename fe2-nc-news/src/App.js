@@ -8,6 +8,7 @@ import Articles from "./components/Articles";
 import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
 import Footer from "./components/Footer";
+import Users from "./components/Users";
 
 class App extends Component {
   render() {
@@ -20,8 +21,9 @@ class App extends Component {
           <Articles path="/articles/:topic" />
           <Article path="/articles/article/:id" />
           <AddArticle path="/articles/new_article" />
+          <Users path="/users" />
         </Router>
-        <Footer className="footer" />
+        <Footer />
       </div>
     );
   }

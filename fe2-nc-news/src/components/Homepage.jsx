@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import Articles from "./Articles";
+// import Articles from "./Articles";
 
 class Homepage extends Component {
   state = {
@@ -23,7 +23,7 @@ class Homepage extends Component {
             );
           })}
         </ul>
-        <Articles path=":topic" />
+        {/* <Articles /> */}
       </main>
     );
   }

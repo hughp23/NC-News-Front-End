@@ -17,7 +17,7 @@ class Article extends Component {
         <ul>
           {comments.map(comment => {
             return (
-              <li>
+              <li key={comment._id}>
                 <h4>Username: {comment.created_by.username}</h4>
                 <p>{comment.body}</p>
                 <p>Posted: {comment.created_at.slice(0, 10)}</p>

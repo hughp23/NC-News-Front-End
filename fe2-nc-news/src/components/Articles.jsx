@@ -9,8 +9,6 @@ class Articles extends Component {
   };
   render() {
     const { articles } = this.state;
-    // console.log(articles, "<--- Articles");
-    console.log(articles);
     return (
       <main className="main">
         <Link to="/articles/new_article">Post New Article</Link>
@@ -37,8 +35,10 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps) {
     const { topic } = this.props;
+    console.log(topic, "topic");
     if (prevProps.topic !== topic) {
       api.getArticles(topic).then(({ articles }) => {
+        console.log(articles, "articles");
         this.setState({ articles });
       });
     }
