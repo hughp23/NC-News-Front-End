@@ -29,3 +29,9 @@
   border: pink 2px solid;
   grid-area: footer;
 }
+
+.router-wrapper {
+  grid-area: main;
+  height: 100%;
+  overflow-y: auto;
+}

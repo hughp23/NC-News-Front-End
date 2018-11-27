@@ -47,3 +47,19 @@ export const updateVote = async (dataType, id, change) => {
   console.log(data, "data");
   return data;
 };
+
+export const addArticle = async (topic, dataToAdd) => {
+  const { data } = await axios.post(
+    `${BASE_URL}/topics/${topic}/articles`,
+    dataToAdd
+  );
+  return data;
+};
+
+export const addComment = async (article_id, dataToAdd) => {
+  const { data } = await axios.post(
+    `${BASE_URL}/articles/${article_id}/comments`,
+    dataToAdd
+  );
+  return data.article;
+};

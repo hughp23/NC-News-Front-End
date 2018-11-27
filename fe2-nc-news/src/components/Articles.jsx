@@ -52,7 +52,7 @@ class Articles extends Component {
       this.setState({ articles });
     });
   }
-  
+
   componentDidUpdate(prevProps) {
     const { topic } = this.props;
     console.log(prevProps.topic);
@@ -64,7 +64,7 @@ class Articles extends Component {
       });
     }
   }
-  
+
   handleClick = event => {
     const { id, value } = event.target;
     api.updateVote("articles", id, value).then(article => {

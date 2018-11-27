@@ -7,7 +7,7 @@ import Homepage from "./components/Homepage";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import Users from "./components/Users";
 import Login from "./components/Login";
 
@@ -16,21 +16,20 @@ class App extends Component {
     user: {}
   };
   render() {
-    console.log(this.state.user, "user");
     return (
       <div className="App">
         <Header className="header" />
         <Login login={this.login} user={this.state.user}>
           <Nav />
-          <Router>
+          <Router className="router-wrapper">
             <Homepage path="/" />
-            <Articles path="/articles/:topic" />
+            <Articles user={this.state.user} path="/articles/:topic" />
             <Article path="/articles/article/:id" />
-            <AddArticle path="/articles/new_article" />
+            <AddArticle user={this.state.user} path="/articles/new_article" />
             <Users path="/users/:username" />
           </Router>
         </Login>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
