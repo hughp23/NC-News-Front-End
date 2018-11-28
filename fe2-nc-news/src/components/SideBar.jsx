@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import { Link } from "@reach/router";
 
 const SideBar = () => {
   return (
@@ -8,6 +8,7 @@ const SideBar = () => {
         <label>Username: </label>
         <input type="text" />
       </form>
+      <Link to="/articles/new_article">Post New Article</Link>
     </div>
   );
 };

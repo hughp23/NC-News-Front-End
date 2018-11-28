@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import "../css/Nav.css";
+import * as api from "../api";
 
 class Nav extends Component {
+  state = {
+    topics: []
+  };
   render() {
+    const { topics } = this.state;
     return (
       <div className="nav">
         <ul className="navBar">
@@ -13,27 +18,26 @@ class Nav extends Component {
               Home
             </Link>
           </li>
-          {/* <Link to="/users">Users</Link>
-           */}
-          <li className="linkList">
-            {" "}
-            <Link className="navLink" to="/articles/coding">
-              Coding
-            </Link>
-          </li>
-          <li className="linkList">
-            <Link className="navLink" to="/articles/football">
-              Football
-            </Link>
-          </li>
-          <li className="linkList">
-            <Link className="navLink" to="/articles/cooking">
-              Cooking
-            </Link>
-          </li>
+          {topics.map(topic => {
+            return (
+              <li className="linkList">
+                {" "}
+                <Link className="navLink" to={`/articles/${topic.slug}`}>
+                  {topic.title}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
+  }
+
+  componentDidMount() {
+    api.getTopics().then(({ topics }) => {
+      console.log(topics, "topics");
+      this.setState({ topics });
+    });
   }
 }
 

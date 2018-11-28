@@ -6,7 +6,7 @@ import { Link } from "@reach/router";
 
 class Article extends Component {
   state = {
-    article: [],
+    article: {},
     comments: [],
     isLoading: true
   };
@@ -28,8 +28,11 @@ class Article extends Component {
         <button id={`${article._id}`} value="down" onClick={this.handleClick}>
           Vote down
         </button>
-        <button disabled>Delete</button>
-        <Comments user={this.props.user} id={article._id} />
+        <Comments
+          topic={article.belongs_to}
+          user={this.props.user}
+          id={article._id}
+        />
       </main>
     );
   }

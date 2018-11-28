@@ -37,6 +37,7 @@ class AddComment extends Component {
       .then(data => {
         console.log(data.comment);
       });
+    window.location.reload();
   };
 }
 

@@ -18,6 +18,11 @@ export const getArticles = async topic => {
   // }
 };
 
+export const getTopics = async () => {
+  const { data } = await axios.get(`${BASE_URL}/topics`);
+  return data;
+};
+
 export const getArticleById = async id => {
   const { data } = await axios.get(`${BASE_URL}/articles/${id}`);
   return data;
@@ -60,5 +65,10 @@ export const addComment = async (article_id, dataToAdd) => {
     `${BASE_URL}/articles/${article_id}/comments`,
     dataToAdd
   );
+  return data;
+};
+
+export const deleteComment = async comment_id => {
+  const { data } = await axios.delete(`${BASE_URL}/comments/${comment_id}`);
   return data;
 };

@@ -3,14 +3,13 @@ import * as api from "../api";
 // import UpdateButton from "./UpdateButton";
 import Collapsible from "react-collapsible";
 import "../css/Comments.css";
-import AddComment from "./AddComment";
-import { Link } from "@reach/router";
 
 class Comments extends Component {
   state = {
     comments: []
   };
   render() {
+    console.log(this.props);
     const { comments } = this.state;
     return (
       <div className="comment">
@@ -41,6 +40,13 @@ class Comments extends Component {
                   >
                     Vote down
                   </button>
+                  {comment.created_by.username === this.props.user.username ? (
+                    <button id={comment._id} onClick={this.onClick}>
+                      Delete
+                    </button>
+                  ) : (
+                    <button disabled>Delete</button>
+                  )}
                 </li>
               );
             })}
@@ -52,6 +58,7 @@ class Comments extends Component {
             <button>Post</button>
           </form>
         </Collapsible>
+        {/* <Redirect to={`/articles/${this.props.topic}`} /> */}
       </div>
     );
   }
@@ -74,7 +81,7 @@ class Comments extends Component {
     console.log(event.target);
     console.log(this.props, "addComment props");
     const { id, user } = this.props;
-    const { body } = this.state
+    const { body } = this.state;
     console.log(user, id);
     event.preventDefault();
     api
@@ -85,11 +92,11 @@ class Comments extends Component {
       })
       .then(data => {
         console.log(data.comment);
+        window.location.reload();
       })
       .catch(err => {
         console.log(err);
       });
-      const newComments = this.state.comments.concat()
   };
 
   handleClick = event => {
@@ -108,6 +115,14 @@ class Comments extends Component {
     // map over articles from state
     // if article id  === id : return { ... article: votes: }
     // this.setState({ articles: updatedComments })
+  };
+
+  onClick = event => {
+    const { id } = event.target;
+    api.deleteComment(id).then(data => {
+      console.log(data, "deletedData");
+      window.location.reload();
+    });
   };
 }
 
