@@ -16,32 +16,39 @@ class AddArticle extends Component {
         <input id="title" type="text" onChange={this.handleChange} />
         <label htmlFor="body">Text: </label>
         <input id="body" type="text" onChange={this.handleChange} />
-        <select name="topic" id="topic">
+        <select name="topic" id="topic" onChange={this.handleChange}>
           <option value="">Choose a Topic...</option>
-          <option value="coding">Coding</option>
-          <option value="football">Football</option>
-          <option value="cooking">Cooking</option>
+          <option id="coding" value="coding">
+            Coding
+          </option>
+          <option id="football" value="football">
+            Football
+          </option>
+          <option id="cooking" value="cooking">
+            Cooking
+          </option>
         </select>
         <button>Post</button>
       </form>
     );
   }
 
-  handleChange(event) {
+  handleChange = event => {
     console.log(event.target.id);
     const { id, value } = event.target;
     this.setState({ [id]: value });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     const { user } = this.props;
+    console.log(this.state);
     event.preventDefault();
     api
       .addArticle(this.state.topic, { ...this.state, created_by: user })
       .then(({ article }) => {
         console.log(article);
       });
-  }
+  };
 }
 
 export default AddArticle;

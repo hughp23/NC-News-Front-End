@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Users from "./components/Users";
 import Login from "./components/Login";
 import SideBar from "./components/SideBar";
+import AddComment from "./components/AddComment";
 
 class App extends Component {
   state = {
@@ -28,6 +29,10 @@ class App extends Component {
             <Articles user={this.state.user} path="/articles/:topic" />
             <Article path="/articles/article/:id" />
             <AddArticle user={this.state.user} path="/articles/new_article" />
+            <AddComment
+              user={this.state.user}
+              path="/article/comments/new_comment"
+            />
             <Users path="/users/:username" />
           </Router>
         </Login>

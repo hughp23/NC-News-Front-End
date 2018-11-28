@@ -3,6 +3,8 @@ import * as api from "../api";
 // import UpdateButton from "./UpdateButton";
 import Collapsible from "react-collapsible";
 import "../css/Comments.css";
+import AddComment from "./AddComment";
+import { Link } from "@reach/router";
 
 class Comments extends Component {
   state = {
@@ -43,6 +45,7 @@ class Comments extends Component {
               );
             })}
           </ul>
+          <AddComment id={this.props.id} />
         </Collapsible>
       </div>
     );
