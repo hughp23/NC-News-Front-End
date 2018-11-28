@@ -3,7 +3,7 @@ import * as api from "../api";
 
 class Login extends Component {
   state = {
-    username: ""
+    username: "tickle122"
   };
   render() {
     console.log(this.state.username, "username");

@@ -26,7 +26,7 @@ class Article extends Component {
         <button id={`${article._id}`} value="down" onClick={this.handleClick}>
           Vote down
         </button>
-        <button disabled="false">Delete</button>
+        <button disabled>Delete</button>
         <Comments id={article._id} />
       </main>
     );

@@ -44,7 +44,6 @@ export const updateVote = async (dataType, id, change) => {
   const { data } = await axios.patch(
     `${BASE_URL}/${dataType}/${id}?votes=${change}`
   );
-  console.log(data, "data");
   return data;
 };
 

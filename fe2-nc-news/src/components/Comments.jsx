@@ -62,11 +62,21 @@ class Comments extends Component {
   updateVote = () => {};
 
   handleClick = event => {
-    console.log(event.target);
     const { id, value } = event.target;
-    api.updateVote("comments", id, value).then(comment => {
-      this.setState({ comment });
+    const { comments } = this.state;
+
+    api.updateVote("comments", id, value).catch(err => console.log(err));
+    const updatedComments = comments.map(comment => {
+      if (comment._id === id) {
+        return { ...comment, votes: comment.votes + (value === "up" ? 1 : -1) };
+      } else return comment;
     });
+    console.log(updatedComments, "newArticles");
+    this.setState({ comments: updatedComments });
+
+    // map over articles from state
+    // if article id  === id : return { ... article: votes: }
+    // this.setState({ articles: updatedComments })
   };
 }
 
