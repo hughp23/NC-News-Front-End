@@ -7,7 +7,9 @@ class Login extends Component {
   };
   render() {
     console.log(this.state.username, "username");
-    if (this.props.user.username) return this.props.children;
+    const savedData = localStorage.getItem("user");
+    console.log(savedData, "local storage");
+    if (this.props.user.username || savedData) return this.props.children;
     return (
       <form onSubmit={this.onSubmit}>
         <label htmlFor="username">Username: </label>

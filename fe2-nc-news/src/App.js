@@ -23,7 +23,7 @@ class App extends Component {
         <Header className="header" />
         <Login login={this.login} user={this.state.user}>
           <Nav />
-          <SideBar />
+          <SideBar/>
           <Router className="router-wrapper">
             <Homepage path="/" />
             <Articles user={this.state.user} path="/articles/:topic" />
@@ -42,7 +42,14 @@ class App extends Component {
   }
 
   login = user => {
-    this.setState({ user });
+    const savedData = localStorage.getItem("user");
+    if (savedData) this.setState(JSON.parse(savedData));
+    else this.setState({ user });
+    this.saveData();
+  };
+
+  saveData = () => {
+    localStorage.setItem("user", JSON.stringify(this.state));
   };
 }
 
