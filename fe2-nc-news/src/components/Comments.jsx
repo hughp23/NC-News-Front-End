@@ -45,7 +45,7 @@ class Comments extends Component {
               );
             })}
           </ul>
-          <AddComment id={this.props.id} />
+          <AddComment user={this.props.user} id={this.props.id} />
         </Collapsible>
       </div>
     );

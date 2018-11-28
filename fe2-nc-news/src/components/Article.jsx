@@ -11,6 +11,7 @@ class Article extends Component {
     isLoading: true
   };
   render() {
+    console.log(this.props, "article props");
     const { article, isLoading } = this.state;
     if (isLoading) return <p>Page is Loading...</p>;
     return (
@@ -27,7 +28,7 @@ class Article extends Component {
           Vote down
         </button>
         <button disabled>Delete</button>
-        <Comments id={article._id} />
+        <Comments user={this.props.user} id={article._id} />
       </main>
     );
   }

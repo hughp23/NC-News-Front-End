@@ -60,5 +60,5 @@ export const addComment = async (article_id, dataToAdd) => {
     `${BASE_URL}/articles/${article_id}/comments`,
     dataToAdd
   );
-  return data.article;
+  return data;
 };

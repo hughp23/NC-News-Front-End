@@ -6,6 +6,7 @@ class AddComment extends Component {
     body: ""
   };
   render() {
+    console.log(this.props, "addcomment");
     return (
       <form className="main" onSubmit={this.handleSubmit}>
         <h1>Add comment here</h1>
@@ -33,8 +34,8 @@ class AddComment extends Component {
         belongs_to: id,
         created_by: user
       })
-      .then(({ comment }) => {
-        console.log(comment);
+      .then(data => {
+        console.log(data.comment);
       });
   };
 }

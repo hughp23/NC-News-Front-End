@@ -27,7 +27,7 @@ class App extends Component {
           <Router className="router-wrapper">
             <Homepage path="/" />
             <Articles user={this.state.user} path="/articles/:topic" />
-            <Article path="/articles/article/:id" />
+            <Article user={this.state.user} path="/articles/article/:id" />
             <AddArticle user={this.state.user} path="/articles/new_article" />
             <AddComment
               user={this.state.user}

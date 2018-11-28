@@ -82,7 +82,6 @@ class Articles extends Component {
   handleClick = event => {
     const { id, value } = event.target;
     const { articles } = this.state;
-
     api.updateVote("articles", id, value).catch(err => console.log(err));
     const updatedArticles = articles.map(article => {
       if (article._id === id) {
