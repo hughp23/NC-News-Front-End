@@ -19,6 +19,8 @@ class Articles extends Component {
             return (
               <li className="articleList" key={article._id}>
                 <h3>{article.title}</h3>
+                <p>Author: {article.created_by.username}</p>
+                <p>Posted: {article.created_at.slice(0, 10)}</p>
                 <p>Comments: {article.comment_count}</p>
                 <p>Votes: {article.votes}</p>
                 <div>

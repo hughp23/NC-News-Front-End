@@ -45,7 +45,12 @@ class Comments extends Component {
               );
             })}
           </ul>
-          <AddComment user={this.props.user} id={this.props.id} />
+          <form className="main" onSubmit={this.handleSubmit}>
+            <h1>Add comment here</h1>
+            <label htmlFor="title">Comment: </label>
+            <input id="body" type="text" onChange={this.handleChange} />
+            <button>Post</button>
+          </form>
         </Collapsible>
       </div>
     );
@@ -59,7 +64,33 @@ class Comments extends Component {
     });
   }
 
-  updateVote = () => {};
+  handleChange = event => {
+    console.log(event.target.id);
+    const { id, value } = event.target;
+    this.setState({ [id]: value });
+  };
+
+  handleSubmit = event => {
+    console.log(event.target);
+    console.log(this.props, "addComment props");
+    const { id, user } = this.props;
+    const { body } = this.state
+    console.log(user, id);
+    event.preventDefault();
+    api
+      .addComment(id, {
+        body,
+        belongs_to: id,
+        created_by: user
+      })
+      .then(data => {
+        console.log(data.comment);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      const newComments = this.state.comments.concat()
+  };
 
   handleClick = event => {
     const { id, value } = event.target;

@@ -19,7 +19,8 @@ class Article extends Component {
         <h1>Article</h1>
         <h1>{article.title}</h1>
         <p>{article.body}</p>
-        <p>{article.created_by.username}</p>
+        <p>Author: {article.created_by.username}</p>
+        <p>Posted: {article.created_at.slice(0, 10)}</p>
         <p>Votes: {article.votes}</p>
         <button id={`${article._id}`} value="up" onClick={this.handleClick}>
           Vote up

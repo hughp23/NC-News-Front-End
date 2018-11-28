@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import { Link } from "@reach/router";
 
 class AddArticle extends Component {
   state = {
     title: "",
     body: "",
-    topic: ""
+    topic: "",
+    created: false
   };
   render() {
     console.log(this.props.user, "user props");
+    if (this.state.created) {
+      return (
+        <div>
+          <h1>Your New Article</h1>
+          <h2>{this.state.title}</h2>
+          <p>Topic: {this.state.topic}</p>
+          <p>{this.state.body}</p>
+          <Link to={`/articles/${this.state.topic}`}>Back to {this.state.topic} articles</Link>
+        </div>
+      );
+    }
     return (
       <form className="main" onSubmit={this.handleSubmit}>
         <h1>Add article here</h1>
@@ -47,6 +60,9 @@ class AddArticle extends Component {
       .addArticle(this.state.topic, { ...this.state, created_by: user })
       .then(({ article }) => {
         console.log(article);
+        this.setState({
+          created: true
+        });
       });
   };
 }
