@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import Popup from "reactjs-popup";
+import AddArticle from "./AddArticle";
 
 class SideBar extends Component {
   render() {
@@ -9,7 +10,13 @@ class SideBar extends Component {
           <label>Username: </label>
           <input type="text" />
         </form>
-        <Link to="/articles/new_article">Post New Article</Link>{" "}
+        <Popup
+          trigger={<button className="button"> Post New Article </button>}
+          modal
+          closeOnDocumentClick
+        >
+          <AddArticle />
+        </Popup>
         <button onClick={this.onClick}>Logout</button>
       </div>
     );

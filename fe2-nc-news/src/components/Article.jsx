@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import Comments from "./Comments";
-import AddComment from "./AddComment";
-import { Link } from "@reach/router";
 
 class Article extends Component {
   state = {
@@ -11,7 +9,6 @@ class Article extends Component {
     isLoading: true
   };
   render() {
-    console.log(this.props, "article props");
     const { article, isLoading } = this.state;
     if (isLoading) return <p>Page is Loading...</p>;
     return (
@@ -38,10 +35,8 @@ class Article extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props, "article props");
     const { id } = this.props;
     api.getArticleById(id).then(({ article }) => {
-      console.log(article, "article");
       this.setState({ article, isLoading: false });
     });
   }

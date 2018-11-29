@@ -20,7 +20,7 @@ class Nav extends Component {
           </li>
           {topics.map(topic => {
             return (
-              <li className="linkList">
+              <li key={topic._id} className="linkList">
                 {" "}
                 <Link className="navLink" to={`/articles/${topic.slug}`}>
                   {topic.title}
@@ -35,7 +35,6 @@ class Nav extends Component {
 
   componentDidMount() {
     api.getTopics().then(({ topics }) => {
-      console.log(topics, "topics");
       this.setState({ topics });
     });
   }

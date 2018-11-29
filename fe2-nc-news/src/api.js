@@ -3,12 +3,10 @@ import axios from "axios";
 const BASE_URL = "https://hidden-escarpment-81683.herokuapp.com/api";
 
 export const getArticles = async topic => {
-  console.log(topic, "topic api");
   if (topic) {
     const { data } = await axios.get(`${BASE_URL}/topics/${topic}/articles`);
     return data;
   } else if (topic === undefined) {
-    console.log(topic, "inside api call");
     const { data } = await axios.get(`${BASE_URL}/articles`);
     return data;
   }
@@ -39,9 +37,7 @@ export const getUsers = async username => {
 };
 
 export const login = async username => {
-  // console.log(username);
   const { data } = await axios.get(`${BASE_URL}/users/${username}`);
-  console.log(data);
   return data.user;
 };
 

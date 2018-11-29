@@ -3,17 +3,26 @@ import * as api from "../api";
 import { Link } from "@reach/router";
 // import Article from "./Article";
 import "../css/Articles.css";
-import UpdateButton from "./UpdateButton";
+import Popup from "reactjs-popup";
+import AddArticle from "./AddArticle";
 
 class Articles extends Component {
   state = {
-    articles: []
+    articles: [],
+    disabled: false
   };
   render() {
     const { articles } = this.state;
     return (
       <main className="main">
-        <Link to="/articles/new_article">Post New Article</Link>
+        <Popup
+          trigger={<button className="button"> Post New Article </button>}
+          modal
+          closeOnDocumentClick
+        >
+          <AddArticle />
+        </Popup>
+        {/* <Link to="/articles/new_article">Post New Article</Link> */}
         <ul>
           {articles.map((article, index) => {
             return (
@@ -58,7 +67,6 @@ class Articles extends Component {
   componentDidMount() {
     const { topic } = this.props;
     api.getArticles(topic).then(({ articles }) => {
-      console.log(articles, "articles");
       this.setState({ articles });
     });
   }

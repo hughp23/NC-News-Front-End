@@ -6,9 +6,7 @@ class Login extends Component {
     username: "tickle122"
   };
   render() {
-    console.log(this.state.username, "username");
     const savedData = localStorage.getItem("user");
-    console.log(savedData, "local storage");
     if (this.props.user.username || savedData) return this.props.children;
     return (
       <form onSubmit={this.onSubmit}>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { Link } from "@reach/router";
+import "../css/AddArticle.css";
 
 class AddArticle extends Component {
   state = {
@@ -18,7 +19,9 @@ class AddArticle extends Component {
           <h2>{this.state.title}</h2>
           <p>Topic: {this.state.topic}</p>
           <p>{this.state.body}</p>
-          <Link to={`/articles/${this.state.topic}`}>Back to {this.state.topic} articles</Link>
+          <Link to={`/articles/${this.state.topic}`}>
+            Back to {this.state.topic} articles
+          </Link>
         </div>
       );
     }
@@ -26,9 +29,21 @@ class AddArticle extends Component {
       <form className="main" onSubmit={this.handleSubmit}>
         <h1>Add article here</h1>
         <label htmlFor="title">Title: </label>
-        <input id="title" type="text" onChange={this.handleChange} />
+        <textarea
+          placeholder="Enter title here"
+          className="textareatitle"
+          id="title"
+          type="text"
+          onChange={this.handleChange}
+        />
         <label htmlFor="body">Text: </label>
-        <input id="body" type="text" onChange={this.handleChange} />
+        <textarea
+          placeholder="Enter text here"
+          className="textareabody"
+          id="body"
+          type="text"
+          onChange={this.handleChange}
+        />
         <select name="topic" id="topic" onChange={this.handleChange}>
           <option value="">Choose a Topic...</option>
           <option id="coding" value="coding">
@@ -41,7 +56,7 @@ class AddArticle extends Component {
             Cooking
           </option>
         </select>
-        <button>Post</button>
+        <button className="button">Post</button>
       </form>
     );
   }

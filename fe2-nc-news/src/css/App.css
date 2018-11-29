@@ -2,7 +2,7 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid-template: 15% 7.5% 87.5% 5%/ 14% 86%;
+  grid-template: 9% 7% 80% 4%/ 14% 86%;
   grid-template-areas:
     "header header"
     "nav nav"
@@ -22,7 +22,6 @@
 }
 
 .main {
-  border: orange 2px solid;
   grid-area: main;
   height: 100%;
 }
