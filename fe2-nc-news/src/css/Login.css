@@ -1,0 +1,17 @@
+.loginForm {
+  border: red 2px solid;
+}
+
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: green 2px solid;
+  grid-column: 1 / 3;
+  grid-row: 2 / 4;
+}
+
+.loginGrid {
+  border: black 2px solid;
+  border-radius: 7px;
+}

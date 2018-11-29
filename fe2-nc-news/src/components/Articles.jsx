@@ -9,12 +9,16 @@ import AddArticle from "./AddArticle";
 class Articles extends Component {
   state = {
     articles: [],
-    disabled: false
+    disabledUp: false,
+    disabledDown: false
   };
   render() {
-    const { articles } = this.state;
+    const { articles, disabledDown, disabledUp } = this.state;
+    const thumbsDownSymbol = "👎";
+    const heartEyesSymbol = "😍";
     return (
       <main className="main">
+        <h1>Welcome To Northcoders News!</h1>
         <Popup
           trigger={<button className="button"> Post New Article </button>}
           modal
@@ -27,35 +31,80 @@ class Articles extends Component {
           {articles.map((article, index) => {
             return (
               <li className="articleList" key={article._id}>
-                <h3>{article.title}</h3>
-                <p>Author: {article.created_by.username}</p>
-                <p>Posted: {article.created_at.slice(0, 10)}</p>
-                <p>Comments: {article.comment_count}</p>
-                <p>Votes: {article.votes}</p>
-                <div>
-                  <button
-                    name={index}
-                    id={`${article._id}`}
-                    value="up"
-                    onClick={this.handleClick}
-                  >
-                    Vote up
-                  </button>
-                  <button
-                    name={index}
-                    id={`${article._id}`}
-                    value="down"
-                    onClick={this.handleClick}
-                  >
-                    Vote down
-                  </button>
-                </div>
                 <Link
+                  className="articleTitle"
                   to={`/articles/article/${article._id}`}
                   params={{ user: this.props.user }}
                 >
-                  Read More...
+                  {<h2>{article.title}</h2>}
                 </Link>
+                <div className="articleInfo">
+                  By:{" "}
+                  <Link to={`/user/${article.created_by.username}`}>
+                    {article.created_by.username}
+                  </Link>
+                  <p>Posted: {article.created_at.slice(0, 10)}</p>
+                </div>
+                <div className="buttonsAndLink">
+                  <div className="commentsAndVotes">
+                    <p>Comments: {article.comment_count}</p>
+                    <p>Votes: {article.votes}</p>
+                  </div>
+                  <div className="votingButtons">
+                    {!disabledUp ? (
+                      <button
+                        className="voteButton"
+                        name={index}
+                        id={`${article._id}`}
+                        value="up"
+                        onClick={this.handleClick}
+                      >
+                        {heartEyesSymbol}
+                      </button>
+                    ) : (
+                      <button
+                        className="voteButton"
+                        disabled
+                        name={index}
+                        id={`${article._id}`}
+                        value="up"
+                        onClick={this.handleClick}
+                      >
+                        {heartEyesSymbol}
+                      </button>
+                    )}
+                    {!disabledDown ? (
+                      <button
+                        className="voteButton"
+                        name={index}
+                        id={`${article._id}`}
+                        value="down"
+                        onClick={this.handleClick}
+                      >
+                        {thumbsDownSymbol}
+                      </button>
+                    ) : (
+                      <button
+                        className="voteButton"
+                        disabled
+                        name={index}
+                        id={`${article._id}`}
+                        value="down"
+                        onClick={this.handleClick}
+                      >
+                        {thumbsDownSymbol}
+                      </button>
+                    )}
+                  </div>
+                  <div className="readMoreLink">
+                    <Link
+                      to={`/articles/article/${article._id}`}
+                      params={{ user: this.props.user }}
+                    >
+                      Read More...
+                    </Link>
+                  </div>
+                </div>
               </li>
             );
           })}
@@ -77,7 +126,6 @@ class Articles extends Component {
     // console.log(topic, "topic");
     if (prevProps.topic !== topic) {
       api.getArticles(topic).then(({ articles }) => {
-        console.log(articles, "articles");
         this.setState({ articles });
       });
     }
@@ -98,8 +146,12 @@ class Articles extends Component {
         return { ...article, votes: article.votes + (value === "up" ? 1 : -1) };
       } else return article;
     });
-    console.log(updatedArticles, "newArticles");
-    this.setState({ articles: updatedArticles });
+    if (value === "up") {
+      this.setState({
+        articles: updatedArticles,
+        disabledUp: true
+      });
+    } else this.setState({ articles: updatedArticles, disabledDown: true });
 
     // map over articles from state
     // if article id  === id : return { ... article: votes: }

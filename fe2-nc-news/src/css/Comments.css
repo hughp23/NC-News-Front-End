@@ -1,11 +1,12 @@
 .comment {
   border: brown 2px solid;
+  background-color: grey;
   margin: 10px;
 }
 
 .collapsibleList {
   text-align: center;
-  background-color: blue;
+  background-color: rgb(184, 46, 46);
   border: black 1px solid;
 }
 

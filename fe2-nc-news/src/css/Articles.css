@@ -1,7 +1,13 @@
 .articleList {
   border: brown 1px solid;
   background-color: #ccc;
+  border-radius: 5px;
   margin: 5px;
+  display: grid;
+  grid-template: 20% 80% / 85% 15%;
+  grid-template-areas:
+    "header buttons"
+    "info buttons";
 }
 
 .button {
@@ -21,4 +27,57 @@
   border-radius: 4px;
   background-color: #f8f8f8;
   resize: none;
+}
+
+.articleInfo {
+  grid-area: info;
+  border: yellow 1px solid;
+  text-align: center;
+}
+
+h2 {
+  grid-area: header;
+  border: red 1px solid;
+  padding: 20px;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+}
+
+.buttonsAndLink {
+  grid-area: buttons;
+  border: green 1px solid;
+}
+
+.articleTitle {
+  text-decoration: none;
+}
+
+.readMoreLink {
+  border: white 1px solid;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.votingButtons {
+  border: red 1px solid;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.commentsAndVotes {
+  border: black 2px solid;
+  padding: 1px;
+  border-radius: 5px;
+}
+
+h1 {
+  color: black;
+}
+
+.voteButton {
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
 }
