@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import Comments from "./Comments";
+import { navigate } from "@reach/router";
 
 class Article extends Component {
   state = {
@@ -11,7 +12,10 @@ class Article extends Component {
     disabledDown: false
   };
   render() {
-    const { article, isLoading, disabledUp, disabledDown } = this.state;
+    const thumbsDownSymbol = "👎";
+    const heartEyesSymbol = "😍";
+    const { article, isLoading, disabledUp, disabledDown, err } = this.state;
+    if (err) return <p>{err}</p>;
     if (isLoading) return <p>Page is Loading...</p>;
     return (
       <main className="main">
@@ -22,7 +26,7 @@ class Article extends Component {
         <p>Votes: {article.votes}</p>
         {!disabledUp ? (
           <button id={`${article._id}`} value="up" onClick={this.handleClick}>
-            Vote up
+            {heartEyesSymbol}
           </button>
         ) : (
           <button
@@ -31,12 +35,12 @@ class Article extends Component {
             value="up"
             onClick={this.handleClick}
           >
-            Vote up
+            {heartEyesSymbol}
           </button>
         )}
         {!disabledDown ? (
           <button id={`${article._id}`} value="down" onClick={this.handleClick}>
-            Vote down
+            {thumbsDownSymbol}
           </button>
         ) : (
           <button
@@ -45,7 +49,7 @@ class Article extends Component {
             value="down"
             onClick={this.handleClick}
           >
-            Vote down
+            {thumbsDownSymbol}
           </button>
         )}
 
@@ -60,9 +64,21 @@ class Article extends Component {
 
   componentDidMount() {
     const { id } = this.props;
-    api.getArticleById(id).then(({ article }) => {
-      this.setState({ article, isLoading: false });
-    });
+    api
+      .getArticleById(id)
+      .then(({ article }) => {
+        this.setState({ article, isLoading: false });
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.respone.status,
+            msg: err.respone.data.msg
+          }
+        });
+        this.setState({ err: err.respone.data.msg });
+      });
   }
 
   handleClick = event => {

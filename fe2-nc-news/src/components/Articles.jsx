@@ -5,6 +5,7 @@ import { Link } from "@reach/router";
 import "../css/Articles.css";
 import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
+import _ from "underscore";
 
 class Articles extends Component {
   state = {
@@ -13,9 +14,24 @@ class Articles extends Component {
     disabledDown: false
   };
   render() {
+    const { searchtext, sortBy } = this.props;
+    console.log(this.props);
+    console.log(sortBy, "text");
     const { articles, disabledDown, disabledUp } = this.state;
     const thumbsDownSymbol = "👎";
     const heartEyesSymbol = "😍";
+    // const { created_at } = articles;
+    let articlesToShow;
+    if (sortBy === "mostRecent") {
+      articlesToShow = _.sortBy(articles, 'created_at');
+    } else if (sortBy === "oldest") {
+      articlesToShow = _.sortBy(articles, 'created_at').reverse();
+    } else if (searchtext.length) {
+      articlesToShow = articles.filter(article => {
+        return article.body.toLowerCase().includes(searchtext.toLowerCase());
+      });
+    } else articlesToShow = articles;
+    console.log(articlesToShow);
     return (
       <main className="main">
         <h1>Welcome To Northcoders News!</h1>
@@ -28,7 +44,7 @@ class Articles extends Component {
         </Popup>
         {/* <Link to="/articles/new_article">Post New Article</Link> */}
         <ul>
-          {articles.map((article, index) => {
+          {articlesToShow.map((article, index) => {
             return (
               <li className="articleList" key={article._id}>
                 <Link
@@ -156,6 +172,11 @@ class Articles extends Component {
     // map over articles from state
     // if article id  === id : return { ... article: votes: }
     // this.setState({ articles: updatedArticles })
+  };
+
+  filterByText = (text, body) => {
+    const regex = new RegExp(text, "gi");
+    return regex.include(body);
   };
 }
 

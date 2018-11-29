@@ -54,7 +54,7 @@ class Comments extends Component {
           <form className="main" onSubmit={this.handleSubmit}>
             <h1>Add comment here</h1>
             <label htmlFor="title">Comment: </label>
-            <input id="body" type="text" onChange={this.handleChange} />
+            <textarea id="body" type="text" onChange={this.handleChange} />
             <button>Post</button>
           </form>
         </Collapsible>

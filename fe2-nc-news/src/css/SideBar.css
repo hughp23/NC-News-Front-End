@@ -1,5 +1,8 @@
 .userSearchBar {
-    border: red solid 1px;
-    padding: 10px;
-  }
-  
+  border: red solid 1px;
+  padding: 10px;
+}
+
+.userLoginName {
+  border: green 1px solid;
+}
