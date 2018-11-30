@@ -72,6 +72,7 @@ class SideBar extends Component {
   onClick = () => {
     localStorage.removeItem("user");
     navigate("/login");
+    window.location.reload();
   };
 
   handleChange = event => {
