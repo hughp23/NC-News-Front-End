@@ -1,3 +1,8 @@
 .mainTitle {
   color: whitesmoke;
+  text-decoration: none;
+}
+
+.headerLink {
+  text-decoration: none;
 }

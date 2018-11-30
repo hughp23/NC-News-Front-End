@@ -48,7 +48,7 @@ class Articles extends Component {
             return (
               <li className="articleList" key={article._id}>
                 <Link
-                  className="articleTitle"
+                  className="articlesTitle"
                   to={`/articles/article/${article._id}`}
                   params={{ user: this.props.user }}
                 >
@@ -122,7 +122,7 @@ class Articles extends Component {
                     )}
                   </div>
                   <div className="readMoreLink">
-                    <Link
+                    <Link className='linkToArticle'
                       to={`/articles/article/${article._id}`}
                       params={{ user: this.props.user }}
                     >

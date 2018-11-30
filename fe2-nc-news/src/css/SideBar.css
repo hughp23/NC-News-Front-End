@@ -28,6 +28,11 @@
   border-radius: 10px;
 }
 
+.postArticleButton:hover {
+  transform: scale(1.05, 1.05);
+  transition: 0.5s ease;
+}
+
 .logoutButton {
   grid-area: logoutButton;
   background-color: rgb(184, 46, 46);
@@ -35,6 +40,11 @@
   width: 50%;
   border-radius: 10px;
   border: none;
+}
+
+.logoutButton:hover {
+  transform: scale(1.05, 1.05);
+  transition: 0.5s ease;
 }
 
 .sortdropDown {
