@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import "../css/AddArticle.css";
 
 class AddArticle extends Component {
@@ -45,7 +45,9 @@ class AddArticle extends Component {
           onChange={this.handleChange}
         />
         <select name="topic" id="topic" onChange={this.handleChange}>
-          <option value="">Choose a Topic...</option>
+          <option value="" selected={true} disabled>
+            Choose a Topic...
+          </option>
           <option id="coding" value="coding">
             Coding
           </option>
@@ -77,6 +79,15 @@ class AddArticle extends Component {
         console.log(article);
         this.setState({
           created: true
+        });
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
         });
       });
   };

@@ -1,8 +1,54 @@
-.userSearchBar {
-  border: red solid 1px;
+.sideBar {
+  height: 100%;
   padding: 10px;
+  text-align: center;
+  display: grid;
+  grid-template: 10% 5% 7% 5% 5% / 100%;
+  grid-gap: 10px;
+  background-color: grey;
+  border-radius: 5px;
+  grid-template-areas:
+    "loginName"
+    "logoutButton"
+    "articleSearch"
+    "sortBy"
+    "postArticle";
 }
 
 .userLoginName {
-  border: green 1px solid;
+  grid-area: loginName;
+}
+
+.postArticleButton {
+  grid-area: postArticle;
+  border: none;
+  background-color: rgb(184, 46, 46);
+  padding: 5px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.logoutButton {
+  grid-area: logoutButton;
+  background-color: rgb(184, 46, 46);
+  padding: 5px;
+  width: 50%;
+  border-radius: 10px;
+  border: none;
+}
+
+.sortdropDown {
+  grid-area: sortBy;
+  padding: 5px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.articleSearchInput {
+  border: black;
+  border-radius: 5px;
+}
+
+.articleSearchForm {
+  grid-area: articleSearch;
 }

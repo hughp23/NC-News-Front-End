@@ -3,6 +3,7 @@ import * as api from "../api";
 // import UpdateButton from "./UpdateButton";
 import Collapsible from "react-collapsible";
 import "../css/Comments.css";
+import { navigate } from "@reach/router";
 
 class Comments extends Component {
   state = {
@@ -65,10 +66,21 @@ class Comments extends Component {
 
   componentDidMount() {
     const { id } = this.props;
-    api.getComments(id).then(({ comments }) => {
-      console.log(comments, "comments");
-      this.setState({ comments });
-    });
+    api
+      .getComments(id)
+      .then(({ comments }) => {
+        console.log(comments, "comments");
+        this.setState({ comments });
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   handleChange = event => {

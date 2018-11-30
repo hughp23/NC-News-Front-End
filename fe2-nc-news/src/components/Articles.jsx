@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 // import Article from "./Article";
 import "../css/Articles.css";
 import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
 import _ from "underscore";
+import User from "./User";
 
 class Articles extends Component {
   state = {
@@ -23,10 +24,10 @@ class Articles extends Component {
     // const { created_at } = articles;
     let articlesToShow;
     if (sortBy === "mostRecent") {
-      articlesToShow = _.sortBy(articles, 'created_at');
+      articlesToShow = _.sortBy(articles, "created_at");
     } else if (sortBy === "oldest") {
-      articlesToShow = _.sortBy(articles, 'created_at').reverse();
-    } else if (searchtext.length) {
+      articlesToShow = _.sortBy(articles, "created_at").reverse();
+    } else if (searchtext && searchtext.length) {
       articlesToShow = articles.filter(article => {
         return article.body.toLowerCase().includes(searchtext.toLowerCase());
       });
@@ -42,7 +43,6 @@ class Articles extends Component {
         >
           <AddArticle />
         </Popup>
-        {/* <Link to="/articles/new_article">Post New Article</Link> */}
         <ul>
           {articlesToShow.map((article, index) => {
             return (
@@ -56,9 +56,18 @@ class Articles extends Component {
                 </Link>
                 <div className="articleInfo">
                   By:{" "}
-                  <Link to={`/user/${article.created_by.username}`}>
-                    {article.created_by.username}
-                  </Link>
+                  <Popup
+                    trigger={
+                      <button className="userButton">
+                        {" "}
+                        {article.created_by.username}{" "}
+                      </button>
+                    }
+                    modal
+                    closeOnDocumentClick
+                  >
+                    <User username={article.created_by.username} />
+                  </Popup>
                   <p>Posted: {article.created_at.slice(0, 10)}</p>
                 </div>
                 <div className="buttonsAndLink">
@@ -141,17 +150,22 @@ class Articles extends Component {
     // console.log(prevProps.topic);
     // console.log(topic, "topic");
     if (prevProps.topic !== topic) {
-      api.getArticles(topic).then(({ articles }) => {
-        this.setState({ articles });
-      });
+      api
+        .getArticles(topic)
+        .then(({ articles }) => {
+          this.setState({ articles });
+        })
+        .catch(err => {
+          navigate("/error", {
+            replace: true,
+            state: {
+              code: err.response.status,
+              msg: err.response.data.msg
+            }
+          });
+        });
     }
   }
-
-  // vote = (id, value) => {
-  //   api.updateVote("articles", id, value).then(article => {
-  //     this.setState({ article });
-  //   });
-  // };
 
   handleClick = event => {
     const { id, value } = event.target;
@@ -168,10 +182,6 @@ class Articles extends Component {
         disabledUp: true
       });
     } else this.setState({ articles: updatedArticles, disabledDown: true });
-
-    // map over articles from state
-    // if article id  === id : return { ... article: votes: }
-    // this.setState({ articles: updatedArticles })
   };
 
   filterByText = (text, body) => {

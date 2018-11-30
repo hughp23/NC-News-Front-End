@@ -1,0 +1,14 @@
+.singleArticleInfo {
+  grid-area: info;
+  border: yellow 1px solid;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.articleTitle {
+  border: green 1px solid;
+}
+
+.articleBody {
+  border: magenta 1px solid;
+}

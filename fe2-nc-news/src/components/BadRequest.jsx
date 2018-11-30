@@ -1,9 +1,13 @@
 import React from "react";
 
-const BadRequest = (props) => {
+const BadRequest = props => {
+  console.log(props.location.state);
+  const { code, msg } = props.location.state;
   return (
     <div>
-      <h1>Bad Request</h1>
+      <h1>
+        {code}: {msg}
+      </h1>
     </div>
   );
 };

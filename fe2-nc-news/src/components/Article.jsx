@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import * as api from "../api";
 import Comments from "./Comments";
 import { navigate } from "@reach/router";
+import User from "./User";
+import Popup from "reactjs-popup";
+import "../css/Article.css";
 
 class Article extends Component {
   state = {
@@ -19,10 +22,24 @@ class Article extends Component {
     if (isLoading) return <p>Page is Loading...</p>;
     return (
       <main className="main">
-        <h1>{article.title}</h1>
-        <p>{article.body}</p>
-        <p>Author: {article.created_by.username}</p>
-        <p>Posted: {article.created_at.slice(0, 10)}</p>
+        <h1 className="articleTitle">{article.title}</h1>
+        <p className="articleBody">{article.body}</p>
+        <div className="singleArticleInfo">
+          By:{" "}
+          <Popup
+            trigger={
+              <button className="userButton">
+                {" "}
+                {article.created_by.username}{" "}
+              </button>
+            }
+            modal
+            closeOnDocumentClick
+          >
+            <User username={article.created_by.username} />
+          </Popup>
+          <p>Posted: {article.created_at.slice(0, 10)}</p>
+        </div>
         <p>Votes: {article.votes}</p>
         {!disabledUp ? (
           <button id={`${article._id}`} value="up" onClick={this.handleClick}>
@@ -73,11 +90,10 @@ class Article extends Component {
         navigate("/error", {
           replace: true,
           state: {
-            code: err.respone.status,
-            msg: err.respone.data.msg
+            code: err.response.status,
+            msg: err.response.data.msg
           }
         });
-        this.setState({ err: err.respone.data.msg });
       });
   }
 

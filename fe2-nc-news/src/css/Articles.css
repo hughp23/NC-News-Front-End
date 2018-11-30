@@ -1,5 +1,5 @@
 .articleList {
-  border: brown 1px solid;
+  /* border: brown 1px solid; */
   background-color: #ccc;
   border-radius: 5px;
   margin: 5px;
@@ -10,11 +10,11 @@
     "info buttons";
 }
 
-.button {
-  border: red 1px solid;
-  background-color: red;
+.userButton {
+  /* border: red 1px solid; */
+  background-color: rgb(184, 46, 46);
   padding: 5px;
-  width: 50%;
+  width: 20%;
   border-radius: 10px;
 }
 
@@ -31,13 +31,14 @@
 
 .articleInfo {
   grid-area: info;
-  border: yellow 1px solid;
   text-align: center;
+  background-color: whitesmoke;
+  border-radius: 5px;
 }
 
 h2 {
   grid-area: header;
-  border: red 1px solid;
+  /* border: red 1px solid; */
   padding: 20px;
   background-color: whitesmoke;
   color: black;
@@ -46,7 +47,7 @@ h2 {
 
 .buttonsAndLink {
   grid-area: buttons;
-  border: green 1px solid;
+  /* border: green 1px solid; */
 }
 
 .articleTitle {
@@ -54,21 +55,22 @@ h2 {
 }
 
 .readMoreLink {
-  border: white 1px solid;
   padding: 20px;
   border-radius: 5px;
+  background-color: whitesmoke;
 }
 
 .votingButtons {
-  border: red 1px solid;
+  /* border: red 1px solid; */
   padding: 10px;
   border-radius: 5px;
 }
 
 .commentsAndVotes {
-  border: black 2px solid;
+  /* border: black 2px solid; */
   padding: 1px;
   border-radius: 5px;
+  background-color: whitesmoke;
 }
 
 h1 {

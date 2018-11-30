@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import { navigate } from "@reach/router";
 
 class AddComment extends Component {
   state = {
@@ -36,6 +37,15 @@ class AddComment extends Component {
       })
       .then(data => {
         console.log(data.comment);
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
       });
     window.location.reload();
   };
