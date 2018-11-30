@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
 import "../css/SideBar.css";
+import { navigate } from "@reach/router/lib/history";
 // import Users from "./Users";
 
 class SideBar extends Component {
@@ -55,7 +56,9 @@ class SideBar extends Component {
         </div>
         <div>
           <Popup
-            trigger={<button className="postArticleButton"> Post New Article </button>}
+            trigger={
+              <button className="postArticleButton"> Post New Article </button>
+            }
             modal
             closeOnDocumentClick
           >
@@ -68,7 +71,7 @@ class SideBar extends Component {
 
   onClick = () => {
     localStorage.removeItem("user");
-    window.location.reload();
+    navigate("/login");
   };
 
   handleChange = event => {
