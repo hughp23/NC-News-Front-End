@@ -99,11 +99,22 @@ class Article extends Component {
 
   handleClick = event => {
     const { id, value } = event.target;
-    api.updateVote("articles", id, value).then(article => {
-      value === "up"
-        ? this.setState({ article, disabledUp: true })
-        : this.setState({ article, disabledDown: true });
-    });
+    api
+      .updateVote("articles", id, value)
+      .then(article => {
+        value === "up"
+          ? this.setState({ article, disabledUp: true })
+          : this.setState({ article, disabledDown: true });
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
+      });
   };
 }
 

@@ -140,9 +140,20 @@ class Articles extends Component {
 
   componentDidMount() {
     const { topic } = this.props;
-    api.getArticles(topic).then(({ articles }) => {
-      this.setState({ articles });
-    });
+    api
+      .getArticles(topic)
+      .then(({ articles }) => {
+        this.setState({ articles });
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
+      });
   }
 
   componentDidUpdate(prevProps) {
@@ -170,7 +181,15 @@ class Articles extends Component {
   handleClick = event => {
     const { id, value } = event.target;
     const { articles } = this.state;
-    api.updateVote("articles", id, value).catch(err => console.log(err));
+    api.updateVote("articles", id, value).catch(err => {
+      navigate("/error", {
+        replace: true,
+        state: {
+          code: err.response.status,
+          msg: err.response.data.msg
+        }
+      });
+    });
     const updatedArticles = articles.map(article => {
       if (article._id === id) {
         return { ...article, votes: article.votes + (value === "up" ? 1 : -1) };

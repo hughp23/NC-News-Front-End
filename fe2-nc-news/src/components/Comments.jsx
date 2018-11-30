@@ -10,7 +10,8 @@ class Comments extends Component {
     comments: []
   };
   render() {
-    console.log(this.props);
+    const savedData = JSON.parse(localStorage.getItem("user"));
+    console.log(savedData.user.username);
     const { comments } = this.state;
     return (
       <div className="comment">
@@ -41,7 +42,7 @@ class Comments extends Component {
                   >
                     Vote down
                   </button>
-                  {comment.created_by.username === this.props.user.username ? (
+                  {comment.created_by.username === savedData.user.username ? (
                     <button id={comment._id} onClick={this.onClick}>
                       Delete
                     </button>
@@ -90,24 +91,27 @@ class Comments extends Component {
   };
 
   handleSubmit = event => {
-    console.log(event.target);
-    console.log(this.props, "addComment props");
-    const { id, user } = this.props;
+    const { id } = this.props;
     const { body } = this.state;
-    console.log(user, id);
+    const savedData = JSON.parse(localStorage.getItem("user"));
     event.preventDefault();
     api
       .addComment(id, {
         body,
         belongs_to: id,
-        created_by: user
+        created_by: savedData.user
       })
       .then(data => {
-        console.log(data.comment);
         window.location.reload();
       })
       .catch(err => {
-        console.log(err);
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
       });
   };
 
@@ -115,7 +119,15 @@ class Comments extends Component {
     const { id, value } = event.target;
     const { comments } = this.state;
 
-    api.updateVote("comments", id, value).catch(err => console.log(err));
+    api.updateVote("comments", id, value).catch(err => {
+      navigate("/error", {
+        replace: true,
+        state: {
+          code: err.response.status,
+          msg: err.response.data.msg
+        }
+      });
+    });
     const updatedComments = comments.map(comment => {
       if (comment._id === id) {
         return { ...comment, votes: comment.votes + (value === "up" ? 1 : -1) };
@@ -123,18 +135,25 @@ class Comments extends Component {
     });
     console.log(updatedComments, "newArticles");
     this.setState({ comments: updatedComments });
-
-    // map over articles from state
-    // if article id  === id : return { ... article: votes: }
-    // this.setState({ articles: updatedComments })
   };
 
   onClick = event => {
     const { id } = event.target;
-    api.deleteComment(id).then(data => {
-      console.log(data, "deletedData");
-      window.location.reload();
-    });
+    api
+      .deleteComment(id)
+      .then(data => {
+        console.log(data, "deletedData");
+        window.location.reload();
+      })
+      .catch(err => {
+        navigate("/error", {
+          replace: true,
+          state: {
+            code: err.response.status,
+            msg: err.response.data.msg
+          }
+        });
+      });
   };
 }
 

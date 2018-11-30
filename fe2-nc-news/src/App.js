@@ -44,7 +44,7 @@ class App extends Component {
             />
             <Article user={user} path="/articles/article/:id" />
             <AddArticle user={user} path="/articles/new_article" />
-            <AddComment user={user} path="/article/comments/new_comment" />
+            {/* <AddComment user={user} path="/article/comments/new_comment" /> */}
             <User path="/user/:username" />
             <BadRequest path="/error" />
             <NotFound default />

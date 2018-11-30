@@ -38,15 +38,15 @@ class AddComment extends Component {
       .then(data => {
         console.log(data.comment);
       })
-      .catch(err => {
-        navigate("/error", {
-          replace: true,
-          state: {
-            code: err.response.status,
-            msg: err.response.data.msg
-          }
-        });
-      });
+      // .catch(err => {
+      //   navigate("/error", {
+      //     replace: true,
+      //     state: {
+      //       code: err.response.status,
+      //       msg: err.response.data.msg
+      //     }
+      //   });
+      // });
     window.location.reload();
   };
 }
