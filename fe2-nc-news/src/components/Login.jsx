@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import "../css/Login.css";
+import { navigate } from "@reach/router";
 
 class Login extends Component {
   state = {
@@ -64,6 +65,7 @@ class Login extends Component {
       .then(user => {
         console.log(user[0], "user");
         this.props.login(user[0]);
+        navigate("/");
       })
       .catch(err => {
         console.log(err, "err");
