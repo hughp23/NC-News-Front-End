@@ -24,9 +24,9 @@ class Articles extends Component {
     // const { created_at } = articles;
     let articlesToShow;
     if (sortBy === "mostRecent") {
-      articlesToShow = _.sortBy(articles, "created_at");
-    } else if (sortBy === "oldest") {
       articlesToShow = _.sortBy(articles, "created_at").reverse();
+    } else if (sortBy === "oldest") {
+      articlesToShow = _.sortBy(articles, "created_at");
     } else if (searchtext && searchtext.length) {
       articlesToShow = articles.filter(article => {
         return article.body.toLowerCase().includes(searchtext.toLowerCase());
