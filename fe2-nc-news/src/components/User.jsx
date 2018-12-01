@@ -8,7 +8,6 @@ class User extends Component {
   };
   render() {
     const { user } = this.state;
-    console.log(user, "user");
     return (
       <div>
         <h1>{user.name}</h1>
@@ -20,9 +19,7 @@ class User extends Component {
 
   componentDidMount() {
     const { username } = this.props;
-    console.log(username, "user/username");
     api.getUser(username).then(data => {
-      console.log(data[0], "userData");
       this.setState({ user: data[0] });
     });
   }

@@ -11,7 +11,6 @@ class AddArticle extends Component {
     created: false
   };
   render() {
-    console.log(this.props.user, "user props");
     if (this.state.created) {
       return (
         <div>
@@ -64,19 +63,16 @@ class AddArticle extends Component {
   }
 
   handleChange = event => {
-    console.log(event.target.id);
     const { id, value } = event.target;
     this.setState({ [id]: value });
   };
 
   handleSubmit = event => {
     const { user } = this.props;
-    console.log(this.state);
     event.preventDefault();
     api
       .addArticle(this.state.topic, { ...this.state, created_by: user })
       .then(({ article }) => {
-        console.log(article);
         this.setState({
           created: true
         });

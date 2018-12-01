@@ -2,12 +2,11 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid-template: 9% 7% 80% 4%/ 14% 86%;
+  grid-template: 9% 7% 84%/ 14% 86%;
   grid-template-areas:
     "header header"
     "nav nav"
     "sideBar main"
-    "footer footer";
 }
 
 .header {

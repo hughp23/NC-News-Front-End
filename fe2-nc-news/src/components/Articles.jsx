@@ -7,21 +7,15 @@ import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
 import _ from "underscore";
 import User from "./User";
+import Voter from "./Voter";
 
 class Articles extends Component {
   state = {
-    articles: [],
-    disabledUp: false,
-    disabledDown: false
+    articles: []
   };
   render() {
     const { searchtext, sortBy } = this.props;
-    console.log(this.props);
-    console.log(sortBy, "text");
-    const { articles, disabledDown, disabledUp } = this.state;
-    const thumbsDownSymbol = "👎";
-    const heartEyesSymbol = "😍";
-    // const { created_at } = articles;
+    const { articles } = this.state;
     let articlesToShow;
     if (sortBy === "mostRecent") {
       articlesToShow = _.sortBy(articles, "created_at").reverse();
@@ -32,7 +26,6 @@ class Articles extends Component {
         return article.body.toLowerCase().includes(searchtext.toLowerCase());
       });
     } else articlesToShow = articles;
-    console.log(articlesToShow);
     return (
       <main className="main">
         <h1>Welcome To Northcoders News!</h1>
@@ -76,53 +69,15 @@ class Articles extends Component {
                     <p>Votes: {article.votes}</p>
                   </div>
                   <div className="votingButtons">
-                    {!disabledUp ? (
-                      <button
-                        className="voteButton"
-                        name={index}
-                        id={`${article._id}`}
-                        value="up"
-                        onClick={this.handleClick}
-                      >
-                        {heartEyesSymbol}
-                      </button>
-                    ) : (
-                      <button
-                        className="voteButton"
-                        disabled
-                        name={index}
-                        id={`${article._id}`}
-                        value="up"
-                        onClick={this.handleClick}
-                      >
-                        {heartEyesSymbol}
-                      </button>
-                    )}
-                    {!disabledDown ? (
-                      <button
-                        className="voteButton"
-                        name={index}
-                        id={`${article._id}`}
-                        value="down"
-                        onClick={this.handleClick}
-                      >
-                        {thumbsDownSymbol}
-                      </button>
-                    ) : (
-                      <button
-                        className="voteButton"
-                        disabled
-                        name={index}
-                        id={`${article._id}`}
-                        value="down"
-                        onClick={this.handleClick}
-                      >
-                        {thumbsDownSymbol}
-                      </button>
-                    )}
+                    <Voter
+                      id={article._id}
+                      dataType="articles"
+                      vote={this.vote}
+                    />
                   </div>
                   <div className="readMoreLink">
-                    <Link className='linkToArticle'
+                    <Link
+                      className="linkToArticle"
                       to={`/articles/article/${article._id}`}
                       params={{ user: this.props.user }}
                     >
@@ -158,8 +113,6 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps) {
     const { topic } = this.props;
-    // console.log(prevProps.topic);
-    // console.log(topic, "topic");
     if (prevProps.topic !== topic) {
       api
         .getArticles(topic)
@@ -178,29 +131,39 @@ class Articles extends Component {
     }
   }
 
-  handleClick = event => {
-    const { id, value } = event.target;
+  // handleClick = event => {
+  //   const { id, value } = event.target;
+  //   const { articles } = this.state;
+  //   api.updateVote("articles", id, value).catch(err => {
+  //     navigate("/error", {
+  //       replace: true,
+  //       state: {
+  //         code: err.response.status,
+  //         msg: err.response.data.msg
+  //       }
+  //     });
+  //   });
+  //   const updatedArticles = articles.map(article => {
+  //     if (article._id === id) {
+  //       return { ...article, votes: article.votes + (value === "up" ? 1 : -1) };
+  //     } else return article;
+  //   });
+  //   if (value === "up
+  //     this.setState({  // console.log(data.article);
+  //       articles: updatedArticles,
+  //       disabledUp: true
+  //     });
+  //   } else this.setState({ articles: updatedArticles, disabledDown: true });
+  // };
+
+  vote = (id, value, votes) => {
     const { articles } = this.state;
-    api.updateVote("articles", id, value).catch(err => {
-      navigate("/error", {
-        replace: true,
-        state: {
-          code: err.response.status,
-          msg: err.response.data.msg
-        }
-      });
-    });
     const updatedArticles = articles.map(article => {
       if (article._id === id) {
-        return { ...article, votes: article.votes + (value === "up" ? 1 : -1) };
+        return { ...article, votes: votes };
       } else return article;
     });
-    if (value === "up") {
-      this.setState({
-        articles: updatedArticles,
-        disabledUp: true
-      });
-    } else this.setState({ articles: updatedArticles, disabledDown: true });
+    this.setState({ articles: updatedArticles });
   };
 
   filterByText = (text, body) => {

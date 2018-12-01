@@ -5,19 +5,17 @@ import { navigate } from "@reach/router";
 import User from "./User";
 import Popup from "reactjs-popup";
 import "../css/Article.css";
+import Voter from "./Voter";
 
 class Article extends Component {
   state = {
     article: {},
     comments: [],
-    isLoading: true,
-    disabledUp: false,
-    disabledDown: false
+    isLoading: true
   };
   render() {
-    const thumbsDownSymbol = "👎";
-    const heartEyesSymbol = "😍";
-    const { article, isLoading, disabledUp, disabledDown, err } = this.state;
+    const { article, isLoading, err } = this.state;
+    console.log(article, "article beforre render");
     if (err) return <p>{err}</p>;
     if (isLoading) return <p>Page is Loading...</p>;
     return (
@@ -39,36 +37,10 @@ class Article extends Component {
             <User username={article.created_by.username} />
           </Popup>
           <p>Posted: {article.created_at.slice(0, 10)}</p>
+          {/* <p>{article.comments.length} Comments</p> */}
         </div>
         <p>Votes: {article.votes}</p>
-        {!disabledUp ? (
-          <button id={`${article._id}`} value="up" onClick={this.handleClick}>
-            {heartEyesSymbol}
-          </button>
-        ) : (
-          <button
-            disabled
-            id={`${article._id}`}
-            value="up"
-            onClick={this.handleClick}
-          >
-            {heartEyesSymbol}
-          </button>
-        )}
-        {!disabledDown ? (
-          <button id={`${article._id}`} value="down" onClick={this.handleClick}>
-            {thumbsDownSymbol}
-          </button>
-        ) : (
-          <button
-            disabled
-            id={`${article._id}`}
-            value="down"
-            onClick={this.handleClick}
-          >
-            {thumbsDownSymbol}
-          </button>
-        )}
+        <Voter dataType="articles" id={article._id} vote={this.vote} />
 
         <Comments
           topic={article.belongs_to}
@@ -115,6 +87,13 @@ class Article extends Component {
           }
         });
       });
+  };
+
+  vote = (id, value, votes) => {
+    const { article } = this.state;
+    this.setState({
+      article: { ...article, votes: votes }
+    });
   };
 }
 

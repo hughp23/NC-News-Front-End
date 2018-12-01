@@ -10,7 +10,6 @@ class Login extends Component {
   };
   render() {
     const { username, password, err } = this.state;
-    console.log(err);
     const savedData = localStorage.getItem("user");
     if (this.props.user.username || savedData) return this.props.children;
     return (
@@ -63,12 +62,10 @@ class Login extends Component {
     api
       .login(this.state.username)
       .then(user => {
-        console.log(user[0], "user");
         this.props.login(user[0]);
         navigate("/");
       })
       .catch(err => {
-        console.log(err, "err");
         this.setState({ err });
       });
   };

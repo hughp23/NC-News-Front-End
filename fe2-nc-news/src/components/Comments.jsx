@@ -4,21 +4,20 @@ import * as api from "../api";
 import Collapsible from "react-collapsible";
 import "../css/Comments.css";
 import { navigate } from "@reach/router";
+import Popup from "reactjs-popup";
+import Voter from "./Voter";
 
 class Comments extends Component {
   state = {
     comments: []
   };
   render() {
-    const savedData = JSON.parse(localStorage.getItem("user"));
-    console.log(savedData.user.username);
+    // const savedData = JSON.parse(localStorage.getItem("user"));
     const { comments } = this.state;
+    const { id } = this.props;
     return (
       <div className="comment">
-        <Collapsible
-          className="collapsibleList"
-          trigger={`${comments.length} Comments`}
-        >
+        <Collapsible className="collapsibleList" trigger={"Show Comments"}>
           <ul className="commentList">
             {comments.map(comment => {
               return (
@@ -27,40 +26,29 @@ class Comments extends Component {
                   <p>{comment.body}</p>
                   <p>Posted: {comment.created_at.slice(0, 10)}</p>
                   <p>Votes: {comment.votes}</p>
-                  {/* <UpdateButton comment={comment} /> */}
-                  <button
-                    id={`${comment._id}`}
-                    value="up"
-                    onClick={this.handleClick}
-                  >
-                    Vote up
-                  </button>
-                  <button
-                    id={`${comment._id}`}
-                    value="down"
-                    onClick={this.handleClick}
-                  >
-                    Vote down
-                  </button>
-                  {comment.created_by.username === savedData.user.username ? (
-                    <button id={comment._id} onClick={this.onClick}>
-                      Delete
-                    </button>
-                  ) : (
-                    <button disabled>Delete</button>
-                  )}
+                  <Voter
+                    dataType="comments"
+                    articleId={id}
+                    id={comment._id}
+                    vote={this.vote}
+                  />
                 </li>
               );
             })}
           </ul>
-          <form className="main" onSubmit={this.handleSubmit}>
-            <h1>Add comment here</h1>
-            <label htmlFor="title">Comment: </label>
-            <textarea id="body" type="text" onChange={this.handleChange} />
-            <button>Post</button>
-          </form>
+          <Popup
+            trigger={<button className="userButton"> Post New Comment </button>}
+            modal
+            closeOnDocumentClick
+          >
+            <form className="main" onSubmit={this.handleSubmit}>
+              <h1>Add comment here</h1>
+              <label htmlFor="title">Comment: </label>
+              <textarea id="body" type="text" onChange={this.handleChange} />
+              <button>Post</button>
+            </form>
+          </Popup>
         </Collapsible>
-        {/* <Redirect to={`/articles/${this.props.topic}`} /> */}
       </div>
     );
   }
@@ -70,7 +58,6 @@ class Comments extends Component {
     api
       .getComments(id)
       .then(({ comments }) => {
-        console.log(comments, "comments");
         this.setState({ comments });
       })
       .catch(err => {
@@ -85,7 +72,6 @@ class Comments extends Component {
   }
 
   handleChange = event => {
-    console.log(event.target.id);
     const { id, value } = event.target;
     this.setState({ [id]: value });
   };
@@ -115,34 +101,11 @@ class Comments extends Component {
       });
   };
 
-  handleClick = event => {
-    const { id, value } = event.target;
-    const { comments } = this.state;
-
-    api.updateVote("comments", id, value).catch(err => {
-      navigate("/error", {
-        replace: true,
-        state: {
-          code: err.response.status,
-          msg: err.response.data.msg
-        }
-      });
-    });
-    const updatedComments = comments.map(comment => {
-      if (comment._id === id) {
-        return { ...comment, votes: comment.votes + (value === "up" ? 1 : -1) };
-      } else return comment;
-    });
-    console.log(updatedComments, "newArticles");
-    this.setState({ comments: updatedComments });
-  };
-
   onClick = event => {
     const { id } = event.target;
     api
       .deleteComment(id)
       .then(data => {
-        console.log(data, "deletedData");
         window.location.reload();
       })
       .catch(err => {
@@ -154,6 +117,16 @@ class Comments extends Component {
           }
         });
       });
+  };
+
+  vote = (id, value, votes) => {
+    const { comments } = this.state;
+    const updatedComments = comments.map(comment => {
+      if (comment._id === id) {
+        return { ...comment, votes: votes };
+      } else return comment;
+    });
+    this.setState({ comments: updatedComments });
   };
 }
 

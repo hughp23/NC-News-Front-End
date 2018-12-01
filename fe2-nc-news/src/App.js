@@ -6,7 +6,6 @@ import { Router } from "@reach/router";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
-import Footer from "./components/Footer";
 import User from "./components/User";
 import Login from "./components/Login";
 import SideBar from "./components/SideBar";
@@ -21,11 +20,10 @@ class App extends Component {
   };
   render() {
     const { user, searchtext, sortBy } = this.state;
-    console.log(sortBy, "text in state");
     return (
       <div className="App">
         <Header className="header" />
-        <Login path='/login' login={this.login} user={user}>
+        <Login path="/login" login={this.login} user={user}>
           <Nav />
           <SideBar
             user={user}
@@ -46,7 +44,6 @@ class App extends Component {
             <BadRequest path="/error" />
             <NotFound default />
           </Router>
-          <Footer />
         </Login>
       </div>
     );
@@ -64,12 +61,10 @@ class App extends Component {
   };
 
   searchArticles = text => {
-    console.log(text, "text search");
     this.setState({ searchtext: text });
   };
 
   sortArticlesBy = sort => {
-    console.log(sort, "sort");
     this.setState({ sortBy: sort });
   };
 }
