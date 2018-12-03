@@ -7,13 +7,14 @@ class Voter extends Component {
     voteChange: 0
   };
   render() {
-    const thumbsDownSymbol = "👎";
+    const thumbsDownSymbol = "💩";
     const heartEyesSymbol = "😍";
     const { voteChange } = this.state;
     const { id } = this.props;
     return (
       <div>
         <button
+          className="voteButton"
           id={id}
           value="up"
           disabled={voteChange === 1}
@@ -22,6 +23,7 @@ class Voter extends Component {
           {heartEyesSymbol}
         </button>
         <button
+          className="voteButton"
           id={id}
           value="down"
           disabled={voteChange === -1}

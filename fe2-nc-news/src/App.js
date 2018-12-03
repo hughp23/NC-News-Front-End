@@ -8,24 +8,33 @@ import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
 import User from "./components/User";
 import Login from "./components/Login";
-import SideBar from "./components/SideBar";
+import SideBarComponent from "./components/SideBar";
 import NotFound from "./components/NotFound";
 import BadRequest from "./components/BadRequest";
+import * as api from "./api";
+import SideBar from "react-sidebar";
+import SidebarExampleSidebar from "./components/ExampleSideBar";
+
+const mql = window.matchMedia(`(min-width: 800px)`);
 
 class App extends Component {
   state = {
     user: {},
     searchtext: "",
-    sortBy: ""
+    sortBy: "",
+    topics: [],
+    sideBarOpen: false,
+    sideBarDocked: mql.matches
   };
   render() {
-    const { user, searchtext, sortBy } = this.state;
+    const { user, searchtext, sortBy, topics } = this.state;
     return (
       <div className="App">
         <Header className="header" />
         <Login path="/login" login={this.login} user={user}>
-          <Nav />
-          <SideBar
+          <Nav topics={topics} />
+          {/* <SidebarExampleSidebar /> */}
+          <SideBarComponent
             user={user}
             searchArticles={this.searchArticles}
             sortArticlesBy={this.sortArticlesBy}
@@ -39,7 +48,11 @@ class App extends Component {
               searchText={searchtext}
             />
             <Article user={user} path="/articles/article/:id" />
-            <AddArticle user={user} path="/articles/new_article" />
+            <AddArticle
+              topics={topics}
+              user={user}
+              path="/articles/new_article"
+            />
             <User path="/user/:username" />
             <BadRequest path="/error" />
             <NotFound default />
@@ -67,6 +80,12 @@ class App extends Component {
   sortArticlesBy = sort => {
     this.setState({ sortBy: sort });
   };
+
+  componentDidMount() {
+    api.getTopics().then(({ topics }) => {
+      this.setState({ topics });
+    });
+  }
 }
 
 export default App;

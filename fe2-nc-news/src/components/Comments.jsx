@@ -12,7 +12,7 @@ class Comments extends Component {
     comments: []
   };
   render() {
-    // const savedData = JSON.parse(localStorage.getItem("user"));
+    const savedData = JSON.parse(localStorage.getItem("user"));
     const { comments } = this.state;
     const { id } = this.props;
     return (
@@ -32,6 +32,13 @@ class Comments extends Component {
                     id={comment._id}
                     vote={this.vote}
                   />
+                  {savedData.user.username === comment.created_by.username ? (
+                    <button id={comment._id} onClick={this.onClick}>
+                      Delete
+                    </button>
+                  ) : (
+                    <button disabled>Delete</button>
+                  )}
                 </li>
               );
             })}

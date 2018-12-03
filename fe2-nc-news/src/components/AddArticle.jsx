@@ -43,7 +43,12 @@ class AddArticle extends Component {
           type="text"
           onChange={this.handleChange}
         />
-        <select name="topic" id="topic" onChange={this.handleChange}>
+        <select
+          className="addArticleTopicDropDown"
+          name="topic"
+          id="topic"
+          onChange={this.handleChange}
+        >
           <option value="" selected={true} disabled>
             Choose a Topic...
           </option>

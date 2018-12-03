@@ -3,10 +3,11 @@ import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
 import "../css/SideBar.css";
 import { navigate } from "@reach/router/lib/history";
+import SideBar from "react-sidebar";
 
-class SideBar extends Component {
+class SideBarComponent extends Component {
   state = {
-    textSearch: ""
+    textSearch: "",
   };
   render() {
     const { user } = this.props;
@@ -26,8 +27,8 @@ class SideBar extends Component {
         </div>
         <div className="articleSearchForm">
           <form onSubmit={this.onSubmit}>
-            <label htmlFor="search">Search Articles: </label>
             <input
+              placeholder="Search Articles..."
               className="articleSearchInput"
               type="text"
               onChange={this.handleChange}
@@ -90,4 +91,4 @@ class SideBar extends Component {
   };
 }
 
-export default SideBar;
+export default SideBarComponent;

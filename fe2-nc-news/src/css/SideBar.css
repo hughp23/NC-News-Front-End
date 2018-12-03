@@ -1,12 +1,12 @@
 .sideBar {
   height: 100%;
-  padding: 10px;
+  padding: 0.3em;
   text-align: center;
   display: grid;
   grid-template: 10% 5% 7% 5% 5% / 100%;
-  grid-gap: 10px;
-  background-color: grey;
-  border-radius: 5px;
+  grid-gap: 1em;
+  background-color: rgb(223, 223, 223);
+  /* border-radius: 5px; */
   grid-template-areas:
     "loginName"
     "logoutButton"
@@ -23,9 +23,10 @@
   grid-area: postArticle;
   border: none;
   background-color: rgb(184, 46, 46);
-  padding: 5px;
+  padding: 0.4em;
   width: 50%;
-  border-radius: 10px;
+  border-radius: 1em;
+  margin: 25%;
 }
 
 .postArticleButton:hover {
@@ -36,10 +37,11 @@
 .logoutButton {
   grid-area: logoutButton;
   background-color: rgb(184, 46, 46);
-  padding: 5px;
+  padding: 0.4em;
   width: 50%;
   border-radius: 10px;
   border: none;
+  margin: 25%;
 }
 
 .logoutButton:hover {
@@ -49,16 +51,36 @@
 
 .sortdropDown {
   grid-area: sortBy;
-  padding: 5px;
+  padding: 0.4em;
   width: 50%;
   border-radius: 10px;
+  margin: 25%;
+  background-color: white;
 }
 
 .articleSearchInput {
   border: black;
-  border-radius: 5px;
+  border-radius: 0.5em;
+  height: 1.7em;
+  margin: 25%;
 }
 
 .articleSearchForm {
   grid-area: articleSearch;
+}
+
+@media screen and (max-width: 992px) {
+  .sideBar {
+    height: 100%;
+    width: 0;
+    position: float;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+  }
+
 }

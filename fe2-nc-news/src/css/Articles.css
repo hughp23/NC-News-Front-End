@@ -1,13 +1,16 @@
 .articleList {
-  border: black 3px solid;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   border-radius: 5px;
-  margin: 5px;
+  margin: 10px;
   display: grid;
   grid-template: 20% 80% / 85% 15%;
   grid-template-areas:
     "header buttons"
     "info buttons";
+}
+
+.welcomeBanner {
+  text-align: center;
 }
 
 .userButton {
@@ -35,11 +38,11 @@
 }
 
 .articleInfo {
+  margin: 2.5px;
   grid-area: info;
   text-align: center;
   background-color: whitesmoke;
   border-radius: 5px;
-  border: black 1px solid;
 }
 
 h2 {
@@ -57,9 +60,9 @@ h2 {
 }
 
 .articlesTitle {
-  border: black 1px solid;
   text-decoration: none;
   border-radius: 5px;
+  margin: 2.5px;
 }
 
 .readMoreLink {
@@ -67,7 +70,7 @@ h2 {
   padding: 20px;
   border-radius: 5px;
   background-color: whitesmoke;
-  border: black 1px solid;
+  margin: 2.5px;
 }
 
 .linkToArticle {
@@ -79,7 +82,7 @@ h2 {
   /* border: red 1px solid; */
   padding: 10px;
   border-radius: 5px;
-  border: black 1px solid;
+  margin: 2.5px;
 }
 
 .commentsAndVotes {
@@ -87,7 +90,7 @@ h2 {
   padding: 1px;
   border-radius: 5px;
   background-color: whitesmoke;
-  border: black 1px solid;
+  margin: 2.5px;
 }
 
 h1 {
@@ -107,6 +110,108 @@ h1 {
   transition: 0.5s ease;
 }
 
-.articleTitle {
-  border: green 1px solid;
+@media screen and (max-width: 992px) {
+  .articleList {
+    width: 50%;
+    text-align: center;
+    display: grid;
+    border: 1px black solid;
+    width: 200px;
+    grid-template: 20% 20% 20% / 100%;
+    grid-template-areas:
+      "header"
+      "buttons"
+      "info";
+  }
+
+  .userButton {
+    border: none;
+    background-color: rgb(184, 46, 46);
+    padding: 5px;
+    width: 60%;
+    border-radius: 10px;
+  }
+
+  .articleInfo {
+    margin: 2.5px;
+    grid-area: info;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  h2 {
+    grid-area: header;
+    /* border: red 1px solid; */
+    padding: 20px;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  .buttonsAndLink {
+    grid-area: buttons;
+    /* border: green 1px solid; */
+  }
+
+  .articlesTitle {
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 2.5px;
+  }
+
+  .readMoreLink {
+    grid-area: buttons;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 2.5px;
+    width: 150px;
+  }
+
+  .linkToArticle {
+    text-decoration: none;
+    color: black;
+  }
+
+  .votingButtons {
+    /* border: red 1px solid; */
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  .commentsAndVotes {
+    padding: 1px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 2.5px;
+    width: 150px;
+  }
+
+  h1 {
+    color: black;
+  }
+
+  .voteButton {
+    border: none;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+  }
+
+  .voteButton:hover {
+    transform: scale(1.3, 1.3);
+    transition: 0.5s ease;
+  }
+
+  .welcomeBanner {
+    text-align: center;
+  }
+
+  .menu {
+    
+  }
 }

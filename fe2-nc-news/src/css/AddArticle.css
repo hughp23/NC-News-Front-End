@@ -32,3 +32,11 @@
   transform: scale(1.05, 1.05);
   transition: 0.5s ease;
 }
+
+.addArticleTopicDropDown {
+  padding: 5px;
+  width: 50%;
+  border-radius: 10px;
+  margin: 40px;
+  background-color: white;
+}

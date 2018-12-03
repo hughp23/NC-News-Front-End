@@ -41,7 +41,18 @@ class Article extends Component {
         </div>
         <p>Votes: {article.votes}</p>
         <Voter dataType="articles" id={article._id} vote={this.vote} />
-
+        <Popup
+          trigger={<button className="userButton"> Post New Comment </button>}
+          modal
+          closeOnDocumentClick
+        >
+          <form className="main" onSubmit={this.handleSubmit}>
+            <h1>Add comment here</h1>
+            <label htmlFor="title">Comment: </label>
+            <textarea id="body" type="text" onChange={this.handleChange} />
+            <button>Post</button>
+          </form>
+        </Popup>
         <Comments
           topic={article.belongs_to}
           user={this.props.user}
@@ -69,14 +80,31 @@ class Article extends Component {
       });
   }
 
-  handleClick = event => {
+  vote = (id, value, votes) => {
+    const { article } = this.state;
+    this.setState({
+      article: { ...article, votes: votes }
+    });
+  };
+
+  handleChange = event => {
     const { id, value } = event.target;
+    this.setState({ [id]: value });
+  };
+
+  handleSubmit = event => {
+    const { id } = this.props;
+    const { body } = this.state;
+    const savedData = JSON.parse(localStorage.getItem("user"));
+    event.preventDefault();
     api
-      .updateVote("articles", id, value)
-      .then(article => {
-        value === "up"
-          ? this.setState({ article, disabledUp: true })
-          : this.setState({ article, disabledDown: true });
+      .addComment(id, {
+        body,
+        belongs_to: id,
+        created_by: savedData.user
+      })
+      .then(data => {
+        window.location.reload();
       })
       .catch(err => {
         navigate("/error", {
@@ -87,13 +115,6 @@ class Article extends Component {
           }
         });
       });
-  };
-
-  vote = (id, value, votes) => {
-    const { article } = this.state;
-    this.setState({
-      article: { ...article, votes: votes }
-    });
   };
 }
 

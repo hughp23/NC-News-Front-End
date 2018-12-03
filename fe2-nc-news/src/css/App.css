@@ -2,25 +2,26 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid-template: 9% 7% 84%/ 14% 86%;
+  grid-template: 9% 7% 82%/ 14% 86%;
   grid-template-areas:
     "header header"
     "nav nav"
-    "sideBar main"
+    "sideBar main";
 }
 
 .header {
   grid-area: header;
-  background-color: rgb(184, 46, 46);
+  background-color: rgb(165, 38, 38);
 }
 
 .nav {
   grid-area: nav;
   padding: 5px;
-  background-color: rgb(184, 46, 46);
+  background-color: rgb(165, 38, 38);
 }
 
 .main {
+  text-align: center;
   grid-area: main;
   height: 100%;
 }
@@ -29,13 +30,17 @@
   grid-area: sideBar;
 }
 
-.footer {
-  grid-area: footer;
-  background-color:  rgb(184, 46, 46);
-}
-
 .router-wrapper {
   grid-area: main;
   height: 100%;
   overflow-y: auto;
+}
+
+@media screen and (max-width: 992px) {
+  .sideBar {
+    width: 50%;
+  }
+  .main {
+    width: 50%;
+  }
 }

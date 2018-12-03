@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { Link, navigate } from "@reach/router";
-// import Article from "./Article";
 import "../css/Articles.css";
 import Popup from "reactjs-popup";
 import AddArticle from "./AddArticle";
@@ -28,7 +27,7 @@ class Articles extends Component {
     } else articlesToShow = articles;
     return (
       <main className="main">
-        <h1>Welcome To Northcoders News!</h1>
+        <h1 className='welcomeBanner'>Welcome To Northcoders News!</h1>
         <Popup
           trigger={<button className="button"> Post New Article </button>}
           modal
@@ -130,31 +129,6 @@ class Articles extends Component {
         });
     }
   }
-
-  // handleClick = event => {
-  //   const { id, value } = event.target;
-  //   const { articles } = this.state;
-  //   api.updateVote("articles", id, value).catch(err => {
-  //     navigate("/error", {
-  //       replace: true,
-  //       state: {
-  //         code: err.response.status,
-  //         msg: err.response.data.msg
-  //       }
-  //     });
-  //   });
-  //   const updatedArticles = articles.map(article => {
-  //     if (article._id === id) {
-  //       return { ...article, votes: article.votes + (value === "up" ? 1 : -1) };
-  //     } else return article;
-  //   });
-  //   if (value === "up
-  //     this.setState({  // console.log(data.article);
-  //       articles: updatedArticles,
-  //       disabledUp: true
-  //     });
-  //   } else this.setState({ articles: updatedArticles, disabledDown: true });
-  // };
 
   vote = (id, value, votes) => {
     const { articles } = this.state;
