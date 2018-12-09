@@ -110,18 +110,19 @@ h1 {
   transition: 0.5s ease;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 640px) {
   .articleList {
     width: 50%;
     text-align: center;
     display: grid;
     border: 1px black solid;
-    width: 200px;
+    width: 415px;
     grid-template: 20% 20% 20% / 100%;
     grid-template-areas:
       "header"
       "buttons"
       "info";
+    justify-items: center;
   }
 
   .userButton {
@@ -135,31 +136,30 @@ h1 {
   .articleInfo {
     margin: 2.5px;
     grid-area: info;
-    text-align: center;
+    align-items: center;
     background-color: whitesmoke;
     border-radius: 5px;
-    width: 150px;
+    width: 290px;
   }
 
   h2 {
     grid-area: header;
-    /* border: red 1px solid; */
     padding: 20px;
     background-color: whitesmoke;
     color: black;
     border-radius: 5px;
-    width: 150px;
+    width: 250px;
   }
 
   .buttonsAndLink {
     grid-area: buttons;
-    /* border: green 1px solid; */
   }
 
   .articlesTitle {
     text-decoration: none;
     border-radius: 5px;
     margin: 2.5px;
+    width: 290px;
   }
 
   .readMoreLink {
@@ -168,18 +168,18 @@ h1 {
     border-radius: 5px;
     background-color: whitesmoke;
     margin: 2.5px;
-    width: 150px;
+    width: 250px;
   }
 
   .linkToArticle {
     text-decoration: none;
     color: black;
+    width: 200px;
   }
 
   .votingButtons {
-    /* border: red 1px solid; */
     border-radius: 5px;
-    width: 150px;
+    width: 270px;
   }
 
   .commentsAndVotes {
@@ -187,7 +187,7 @@ h1 {
     border-radius: 5px;
     background-color: whitesmoke;
     margin: 2.5px;
-    width: 150px;
+    width: 290px;
   }
 
   h1 {
@@ -209,9 +209,5 @@ h1 {
 
   .welcomeBanner {
     text-align: center;
-  }
-
-  .menu {
-    
   }
 }

@@ -26,8 +26,8 @@ class Articles extends Component {
       });
     } else articlesToShow = articles;
     return (
-      <main className="main">
-        <h1 className='welcomeBanner'>Welcome To Northcoders News!</h1>
+      <main className="articlesList">
+        <h1 className="welcomeBanner">Welcome To Northcoders News!</h1>
         <Popup
           trigger={<button className="button"> Post New Article </button>}
           modal

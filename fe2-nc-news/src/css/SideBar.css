@@ -1,4 +1,4 @@
-.sideBar {
+/* .sideBar {
   height: 100%;
   padding: 0.3em;
   text-align: center;
@@ -6,7 +6,6 @@
   grid-template: 10% 5% 7% 5% 5% / 100%;
   grid-gap: 1em;
   background-color: rgb(223, 223, 223);
-  /* border-radius: 5px; */
   grid-template-areas:
     "loginName"
     "logoutButton"
@@ -83,4 +82,4 @@
     transition: 0.5s;
   }
 
-}
+} */

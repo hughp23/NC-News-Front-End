@@ -14,27 +14,6 @@ class SideBarComponent extends Component {
     const savedData = JSON.parse(localStorage.getItem("user"));
     return (
       <div className="sideBar">
-        <div className="userLoginName">
-          <h3>
-            You are logged in as{" "}
-            {savedData ? savedData.user.username : user.username}
-          </h3>
-        </div>
-        <div className="logoutButtonBox">
-          <button className="logoutButton" onClick={this.onClick}>
-            Logout
-          </button>
-        </div>
-        <div className="articleSearchForm">
-          <form onSubmit={this.onSubmit}>
-            <input
-              placeholder="Search Articles..."
-              className="articleSearchInput"
-              type="text"
-              onChange={this.handleChange}
-            />
-          </form>
-        </div>
         <div className="dropDownBox">
           <select
             className="sortdropDown"

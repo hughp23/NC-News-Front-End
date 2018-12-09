@@ -25,7 +25,7 @@ class AddArticle extends Component {
       );
     }
     return (
-      <form className="main" onSubmit={this.handleSubmit}>
+      <form className="postArticleForm" onSubmit={this.handleSubmit}>
         <h1>Add article here</h1>
         <label htmlFor="title">Title: </label>
         <textarea

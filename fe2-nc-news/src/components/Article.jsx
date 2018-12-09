@@ -19,7 +19,7 @@ class Article extends Component {
     if (err) return <p>{err}</p>;
     if (isLoading) return <p>Page is Loading...</p>;
     return (
-      <main className="main">
+      <main className="singleArticle">
         <h1 className="articleTitle">{article.title}</h1>
         <p className="articleBody">{article.body}</p>
         <div className="singleArticleInfo">

@@ -5,6 +5,7 @@
   overflow: hidden;
   background-color: #333;
   border-radius: 7px;
+  height: 3em;
 }
 
 .linkList {
@@ -21,4 +22,199 @@ li .navLink {
 
 li .navLink:hover {
   background-color: #111;
+}
+
+.navOptions {
+  display: grid;
+  grid-template: 100% / 15% 15% 15% 15% 15%;
+  grid-template-areas: "login logout search dropDown post";
+  justify-content: end;
+  height: 3em;
+}
+
+.userLoginName {
+  grid-area: login;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.logoutButtonBox {
+  grid-area: logout;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.articleSearchForm {
+  grid-area: search;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.dropDownBox {
+  grid-area: dropDown;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.postArticleButtonBox {
+  grid-area: post;
+  align-self: center;
+  margin: 0.5em;
+}
+
+.postArticleButton {
+  grid-area: postArticle;
+  border: none;
+  background-color: rgb(184, 46, 46);
+  width: 50%;
+  border-radius: 1em;
+}
+
+.postArticleButton:hover {
+  transform: scale(1.05, 1.05);
+  transition: 0.5s ease;
+}
+
+.logoutButton {
+  grid-area: logoutButton;
+  background-color: rgb(184, 46, 46);
+  width: 50%;
+  border-radius: 10px;
+  border: none;
+}
+
+.logoutButton:hover {
+  transform: scale(1.05, 1.05);
+  transition: 0.5s ease;
+}
+
+.sortdropDown {
+  grid-area: sortBy;
+  width: 70%;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.articleSearchInput {
+  border-radius: 0.5em;
+  height: 1.7em;
+  width: 70%;
+}
+
+@media screen and (max-width: 640px) {
+  .navBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 7px;
+    height: 5em;
+    display: grid;
+    grid-template: 50% 50% / 100%;
+    grid-template-areas:
+      "links"
+      "options";
+  }
+  .linkList {
+    float: left;
+  }
+
+  li .navLink {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li .navLink:hover {
+    background-color: #111;
+  }
+
+  .links {
+    grid-area: links;
+    height: 5em;
+  }
+
+  .navOptions {
+    grid-area: options;
+    display: grid;
+    grid-template: 100% / 15% 15% 15% 15% 15%;
+    grid-template-areas: "login logout search dropDown post";
+    justify-content: space-between;
+    height: 2.3em;
+  }
+
+  .userLoginName {
+    grid-area: login;
+    height: 80%;
+    width: 120%;
+    font-size: 10px;
+  }
+
+  .logoutButtonBox {
+    grid-area: logout;
+    align-self: center;
+    width: 120%;
+  }
+
+  .articleSearchForm {
+    grid-area: search;
+    align-self: center;
+    width: 135%;
+  }
+
+  .dropDownBox {
+    grid-area: dropDown;
+    align-self: center;
+    width: 110%;
+  }
+
+  .postArticleButtonBox {
+    grid-area: post;
+    align-self: center;
+    width: 100%;
+  }
+
+  .postArticleButton {
+    grid-area: postArticle;
+    border: none;
+    background-color: rgb(184, 46, 46);
+    width: 80%;
+    border-radius: 1em;
+    font-size: 10px;
+  }
+
+  .postArticleButton:hover {
+    transform: scale(1.05, 1.05);
+    transition: 0.5s ease;
+  }
+
+  .logoutButton {
+    grid-area: logoutButton;
+    background-color: rgb(184, 46, 46);
+    width: 80%;
+    border-radius: 10px;
+    border: none;
+    font-size: 11px;
+  }
+
+  .logoutButton:hover {
+    transform: scale(1.05, 1.05);
+    transition: 0.5s ease;
+  }
+
+  .sortdropDown {
+    grid-area: sortBy;
+    width: 80%;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .articleSearchInput {
+    border-radius: 0.5em;
+    height: 1.1em;
+    width: 80%;
+  }
 }

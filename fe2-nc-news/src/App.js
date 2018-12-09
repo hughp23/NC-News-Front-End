@@ -32,13 +32,18 @@ class App extends Component {
       <div className="App">
         <Header className="header" />
         <Login path="/login" login={this.login} user={user}>
-          <Nav topics={topics} />
-          {/* <SidebarExampleSidebar /> */}
-          <SideBarComponent
+          <Nav
+            topics={topics}
             user={user}
             searchArticles={this.searchArticles}
             sortArticlesBy={this.sortArticlesBy}
           />
+          {/* <SidebarExampleSidebar /> */}
+          {/* <SideBarComponent
+            user={user}
+            searchArticles={this.searchArticles}
+            sortArticlesBy={this.sortArticlesBy}
+          /> */}
           <Router className="router-wrapper">
             <Articles searchtext={searchtext} sortBy={sortBy} path="/" />
             <Articles
